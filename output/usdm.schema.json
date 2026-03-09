@@ -1,0 +1,6650 @@
+{
+    "$defs": {
+        "Abbreviation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "abbreviatedText": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "expandedText": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "instanceType": {
+                    "const": "Abbreviation",
+                    "enum": [
+                        "Abbreviation"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Abbreviation",
+            "type": "object"
+        },
+        "Activity": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "bcCategoryIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "bcSurrogateIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "biomedicalConceptIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "childIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "definedProcedures": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Activity",
+                    "enum": [
+                        "Activity"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "nextId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "previousId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "timelineId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Activity",
+            "type": "object"
+        },
+        "Address": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "city": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "country": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "district": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Address",
+                    "enum": [
+                        "Address"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "lines": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "postalCode": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "state": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Address",
+            "type": "object"
+        },
+        "AdministrableProduct": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "administrableDoseForm": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identifiers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "ingredients": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "instanceType": {
+                    "const": "AdministrableProduct",
+                    "enum": [
+                        "AdministrableProduct"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "pharmacologicClass": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "productDesignation": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "properties": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "sourcing": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "AdministrableProduct",
+            "type": "object"
+        },
+        "AdministrableProductIdentifier": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "AdministrableProductIdentifier",
+                    "enum": [
+                        "AdministrableProductIdentifier"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "scopeId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "AdministrableProductIdentifier",
+            "type": "object"
+        },
+        "AdministrableProductProperty": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "AdministrableProductProperty",
+                    "enum": [
+                        "AdministrableProductProperty"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "quantity": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "AdministrableProductProperty",
+            "type": "object"
+        },
+        "Administration": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "administrableProductId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "dose": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "duration": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "frequency": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Administration",
+                    "enum": [
+                        "Administration"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "medicalDeviceId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "route": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Administration",
+            "type": "object"
+        },
+        "AliasCode": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "AliasCode",
+                    "enum": [
+                        "AliasCode"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "standardCode": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "standardCodeAliases": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "AliasCode",
+            "type": "object"
+        },
+        "AnalysisPopulation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "AnalysisPopulation",
+                    "enum": [
+                        "AnalysisPopulation"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "subsetOfIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "AnalysisPopulation",
+            "type": "object"
+        },
+        "AssignedPerson": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "AssignedPerson",
+                    "enum": [
+                        "AssignedPerson"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "jobTitle": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "organizationId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "personName": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "AssignedPerson",
+            "type": "object"
+        },
+        "BaseAliasCode": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "AliasCode",
+                    "enum": [
+                        "BaseAliasCode"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "standardCode": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "standardCodeAliases": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BaseAliasCode",
+            "type": "object"
+        },
+        "BaseCode": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "codeSystem": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "codeSystemVersion": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "decode": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Code",
+                    "enum": [
+                        "BaseCode"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BaseCode",
+            "type": "object"
+        },
+        "BaseQuantity": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Quantity",
+                    "enum": [
+                        "BaseQuantity"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "unit": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "value": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BaseQuantity",
+            "type": "object"
+        },
+        "BaseRange": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Range",
+                    "enum": [
+                        "BaseRange"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "isApproximate": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "maxValue": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "minValue": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BaseRange",
+            "type": "object"
+        },
+        "BiomedicalConcept": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "BiomedicalConcept",
+                    "enum": [
+                        "BiomedicalConcept"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "properties": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "reference": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "synonyms": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BiomedicalConcept",
+            "type": "object"
+        },
+        "BiomedicalConceptCategory": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "childIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "BiomedicalConceptCategory",
+                    "enum": [
+                        "BiomedicalConceptCategory"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "memberIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BiomedicalConceptCategory",
+            "type": "object"
+        },
+        "BiomedicalConceptProperty": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "datatype": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "BiomedicalConceptProperty",
+                    "enum": [
+                        "BiomedicalConceptProperty"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "isEnabled": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "isRequired": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "responseCodes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BiomedicalConceptProperty",
+            "type": "object"
+        },
+        "BiomedicalConceptSurrogate": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "BiomedicalConceptSurrogate",
+                    "enum": [
+                        "BiomedicalConceptSurrogate"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "reference": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BiomedicalConceptSurrogate",
+            "type": "object"
+        },
+        "BiospecimenRetention": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "includesDNA": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "instanceType": {
+                    "const": "BiospecimenRetention",
+                    "enum": [
+                        "BiospecimenRetention"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "isRetained": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BiospecimenRetention",
+            "type": "object"
+        },
+        "Characteristic": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "dictionaryId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Characteristic",
+                    "enum": [
+                        "Characteristic"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Characteristic",
+            "type": "object"
+        },
+        "Code": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "codeSystem": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "codeSystemVersion": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "decode": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Code",
+                    "enum": [
+                        "Code"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Code",
+            "type": "object"
+        },
+        "CommentAnnotation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "codes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "CommentAnnotation",
+                    "enum": [
+                        "CommentAnnotation"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "CommentAnnotation",
+            "type": "object"
+        },
+        "Condition": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "appliesToIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "contextIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "dictionaryId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Condition",
+                    "enum": [
+                        "Condition"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Condition",
+            "type": "object"
+        },
+        "ConditionAssignment": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "condition": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "conditionTargetId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "ConditionAssignment",
+                    "enum": [
+                        "ConditionAssignment"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ConditionAssignment",
+            "type": "object"
+        },
+        "DocumentContentReference": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "appliesToId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "DocumentContentReference",
+                    "enum": [
+                        "DocumentContentReference"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sectionNumber": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sectionTitle": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "DocumentContentReference",
+            "type": "object"
+        },
+        "Duration": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "durationWillVary": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Duration",
+                    "enum": [
+                        "Duration"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "quantity": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "reasonDurationWillVary": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Duration",
+            "type": "object"
+        },
+        "EligibilityCriterion": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "category": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "criterionItemId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identifier": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "instanceType": {
+                    "const": "EligibilityCriterion",
+                    "enum": [
+                        "EligibilityCriterion"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "nextId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "previousId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "EligibilityCriterion",
+            "type": "object"
+        },
+        "EligibilityCriterionItem": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "dictionaryId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "EligibilityCriterionItem",
+                    "enum": [
+                        "EligibilityCriterionItem"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "EligibilityCriterionItem",
+            "type": "object"
+        },
+        "Encounter": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "contactModes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "environmentalSettings": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Encounter",
+                    "enum": [
+                        "Encounter"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "nextId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "previousId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "scheduledAtId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transitionEndRule": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transitionStartRule": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Encounter",
+            "type": "object"
+        },
+        "Endpoint": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "dictionaryId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Endpoint",
+                    "enum": [
+                        "Endpoint"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "level": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "purpose": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Endpoint",
+            "type": "object"
+        },
+        "Estimand": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "analysisPopulationId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Estimand",
+                    "enum": [
+                        "Estimand"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "intercurrentEvents": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "interventionIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "populationSummary": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "variableOfInterestId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Estimand",
+            "type": "object"
+        },
+        "ExtensionAttribute": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "ExtensionAttribute",
+                    "enum": [
+                        "ExtensionAttribute"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "url": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "valueAliasCode": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "valueBoolean": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "valueCode": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "valueExtensionClass": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "valueId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "valueInteger": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "valueQuantity": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "valueRange": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "valueString": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ExtensionAttribute",
+            "type": "object"
+        },
+        "ExtensionClass": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "ExtensionClass",
+                    "enum": [
+                        "ExtensionClass"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "url": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ExtensionClass",
+            "type": "object"
+        },
+        "GeographicScope": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "GeographicScope",
+                    "enum": [
+                        "GeographicScope"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "GeographicScope",
+            "type": "object"
+        },
+        "GovernanceDate": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "dateValue": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "geographicScopes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "GovernanceDate",
+                    "enum": [
+                        "GovernanceDate"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "GovernanceDate",
+            "type": "object"
+        },
+        "Indication": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "codes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Indication",
+                    "enum": [
+                        "Indication"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "isRareDisease": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Indication",
+            "type": "object"
+        },
+        "Ingredient": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Ingredient",
+                    "enum": [
+                        "Ingredient"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "role": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "substance": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Ingredient",
+            "type": "object"
+        },
+        "IntercurrentEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "dictionaryId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "IntercurrentEvent",
+                    "enum": [
+                        "IntercurrentEvent"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "strategy": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "IntercurrentEvent",
+            "type": "object"
+        },
+        "InterventionalStudyDesign": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "activities": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "analysisPopulations": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "arms": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "biospecimenRetentions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "blindingSchema": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "characteristics": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "documentVersionIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "elements": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "eligibilityCriteria": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "encounters": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "epochs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "estimands": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "indications": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "instanceType": {
+                    "const": "InterventionalStudyDesign",
+                    "enum": [
+                        "InterventionalStudyDesign"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "intentTypes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "model": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "objectives": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "population": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "rationale": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "scheduleTimelines": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "studyCells": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "studyInterventionIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "studyPhase": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "studyType": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "subTypes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "therapeuticAreas": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "InterventionalStudyDesign",
+            "type": "object"
+        },
+        "Masking": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Masking",
+                    "enum": [
+                        "Masking"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "isMasked": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Masking",
+            "type": "object"
+        },
+        "MedicalDevice": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "embeddedProductId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "hardwareVersion": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identifiers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "instanceType": {
+                    "const": "MedicalDevice",
+                    "enum": [
+                        "MedicalDevice"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "softwareVersion": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sourcing": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "MedicalDevice",
+            "type": "object"
+        },
+        "MedicalDeviceIdentifier": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "MedicalDeviceIdentifier",
+                    "enum": [
+                        "MedicalDeviceIdentifier"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "scopeId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "MedicalDeviceIdentifier",
+            "type": "object"
+        },
+        "NarrativeContent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "childIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "contentItemId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "displaySectionNumber": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "displaySectionTitle": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "NarrativeContent",
+                    "enum": [
+                        "NarrativeContent"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "nextId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "previousId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sectionNumber": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sectionTitle": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "NarrativeContent",
+            "type": "object"
+        },
+        "NarrativeContentItem": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "NarrativeContentItem",
+                    "enum": [
+                        "NarrativeContentItem"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "NarrativeContentItem",
+            "type": "object"
+        },
+        "Objective": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "dictionaryId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "endpoints": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Objective",
+                    "enum": [
+                        "Objective"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "level": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Objective",
+            "type": "object"
+        },
+        "ObservationalStudyDesign": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "activities": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "analysisPopulations": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "arms": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "biospecimenRetentions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "characteristics": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "documentVersionIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "elements": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "eligibilityCriteria": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "encounters": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "epochs": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "estimands": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "indications": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "instanceType": {
+                    "const": "ObservationalStudyDesign",
+                    "enum": [
+                        "ObservationalStudyDesign"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "model": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "objectives": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "population": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "rationale": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "samplingMethod": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "scheduleTimelines": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "studyCells": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "studyInterventionIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "studyPhase": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "studyType": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "subTypes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "therapeuticAreas": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "timePerspective": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ObservationalStudyDesign",
+            "type": "object"
+        },
+        "Organization": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "identifier": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "identifierScheme": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "instanceType": {
+                    "const": "Organization",
+                    "enum": [
+                        "Organization"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "legalAddress": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "managedSites": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Organization",
+            "type": "object"
+        },
+        "ParameterMap": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "ParameterMap",
+                    "enum": [
+                        "ParameterMap"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "reference": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tag": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ParameterMap",
+            "type": "object"
+        },
+        "PersonName": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "familyName": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "givenNames": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "PersonName",
+                    "enum": [
+                        "PersonName"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "prefixes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "suffixes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "PersonName",
+            "type": "object"
+        },
+        "Procedure": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Procedure",
+                    "enum": [
+                        "Procedure"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "procedureType": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "studyInterventionId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Procedure",
+            "type": "object"
+        },
+        "ProductOrganizationRole": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "appliesToIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "ProductOrganizationRole",
+                    "enum": [
+                        "ProductOrganizationRole"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "organizationId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ProductOrganizationRole",
+            "type": "object"
+        },
+        "Quantity": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Quantity",
+                    "enum": [
+                        "Quantity"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "unit": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "value": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Quantity",
+            "type": "object"
+        },
+        "Range": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Range",
+                    "enum": [
+                        "Range"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "isApproximate": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "maxValue": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "minValue": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Range",
+            "type": "object"
+        },
+        "ReferenceIdentifier": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "ReferenceIdentifier",
+                    "enum": [
+                        "ReferenceIdentifier"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "scopeId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ReferenceIdentifier",
+            "type": "object"
+        },
+        "ResponseCode": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "ResponseCode",
+                    "enum": [
+                        "ResponseCode"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "isEnabled": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ResponseCode",
+            "type": "object"
+        },
+        "ScheduleTimeline": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "entryCondition": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "entryId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "exits": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "ScheduleTimeline",
+                    "enum": [
+                        "ScheduleTimeline"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "instances": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "mainTimeline": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "plannedDuration": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "timings": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ScheduleTimeline",
+            "type": "object"
+        },
+        "ScheduleTimelineExit": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "ScheduleTimelineExit",
+                    "enum": [
+                        "ScheduleTimelineExit"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ScheduleTimelineExit",
+            "type": "object"
+        },
+        "ScheduledActivityInstance": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "activityIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "defaultConditionId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "encounterId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "epochId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "ScheduledActivityInstance",
+                    "enum": [
+                        "ScheduledActivityInstance"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "timelineExitId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "timelineId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ScheduledActivityInstance",
+            "type": "object"
+        },
+        "ScheduledDecisionInstance": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "conditionAssignments": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "defaultConditionId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "epochId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "ScheduledDecisionInstance",
+                    "enum": [
+                        "ScheduledDecisionInstance"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ScheduledDecisionInstance",
+            "type": "object"
+        },
+        "Strength": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "denominator": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Strength",
+                    "enum": [
+                        "Strength"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "numerator": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Strength",
+            "type": "object"
+        },
+        "Study": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "documentedBy": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Study",
+                    "enum": [
+                        "Study"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "versions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Study",
+            "type": "object"
+        },
+        "StudyAmendment": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "changes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "dateValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "enrollments": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "geographicScopes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "impacts": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "instanceType": {
+                    "const": "StudyAmendment",
+                    "enum": [
+                        "StudyAmendment"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "number": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "previousId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "primaryReason": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "secondaryReasons": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "summary": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyAmendment",
+            "type": "object"
+        },
+        "StudyAmendmentImpact": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyAmendmentImpact",
+                    "enum": [
+                        "StudyAmendmentImpact"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "isSubstantial": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyAmendmentImpact",
+            "type": "object"
+        },
+        "StudyAmendmentReason": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyAmendmentReason",
+                    "enum": [
+                        "StudyAmendmentReason"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "otherReason": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyAmendmentReason",
+            "type": "object"
+        },
+        "StudyArm": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "dataOriginDescription": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "dataOriginType": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyArm",
+                    "enum": [
+                        "StudyArm"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "populationIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyArm",
+            "type": "object"
+        },
+        "StudyCell": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "armId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "elementIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "epochId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyCell",
+                    "enum": [
+                        "StudyCell"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyCell",
+            "type": "object"
+        },
+        "StudyChange": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "changedSections": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyChange",
+                    "enum": [
+                        "StudyChange"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "rationale": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "summary": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyChange",
+            "type": "object"
+        },
+        "StudyCohort": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "characteristics": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "criterionIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "includesHealthySubjects": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "indicationIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "instanceType": {
+                    "const": "StudyCohort",
+                    "enum": [
+                        "StudyCohort"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "plannedAge": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "plannedCompletionNumber": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "type": "string"
+                },
+                "plannedEnrollmentNumber": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "type": "string"
+                },
+                "plannedSex": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "plannedEnrollmentNumber",
+                "plannedCompletionNumber"
+            ],
+            "title": "StudyCohort",
+            "type": "object"
+        },
+        "StudyDefinitionDocument": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "childIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyDefinitionDocument",
+                    "enum": [
+                        "StudyDefinitionDocument"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "language": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "templateName": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "versions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyDefinitionDocument",
+            "type": "object"
+        },
+        "StudyDefinitionDocumentVersion": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "contents": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "dateValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyDefinitionDocumentVersion",
+                    "enum": [
+                        "StudyDefinitionDocumentVersion"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "status": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "version": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyDefinitionDocumentVersion",
+            "type": "object"
+        },
+        "StudyDesignPopulation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "cohorts": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "criterionIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "includesHealthySubjects": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "instanceType": {
+                    "const": "StudyDesignPopulation",
+                    "enum": [
+                        "StudyDesignPopulation"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "plannedAge": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "plannedCompletionNumber": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "type": "string"
+                },
+                "plannedEnrollmentNumber": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "type": "string"
+                },
+                "plannedSex": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "plannedEnrollmentNumber",
+                "plannedCompletionNumber"
+            ],
+            "title": "StudyDesignPopulation",
+            "type": "object"
+        },
+        "StudyElement": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyElement",
+                    "enum": [
+                        "StudyElement"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "studyInterventionIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "transitionEndRule": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "transitionStartRule": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyElement",
+            "type": "object"
+        },
+        "StudyEpoch": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyEpoch",
+                    "enum": [
+                        "StudyEpoch"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "nextId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "previousId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyEpoch",
+            "type": "object"
+        },
+        "StudyIdentifier": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyIdentifier",
+                    "enum": [
+                        "StudyIdentifier"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "scopeId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyIdentifier",
+            "type": "object"
+        },
+        "StudyIntervention": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "administrations": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "codes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyIntervention",
+                    "enum": [
+                        "StudyIntervention"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "minimumResponseDuration": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "role": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyIntervention",
+            "type": "object"
+        },
+        "StudyRole": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "appliesToIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "assignedPersons": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyRole",
+                    "enum": [
+                        "StudyRole"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "masking": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "organizationIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyRole",
+            "type": "object"
+        },
+        "StudySite": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "country": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudySite",
+                    "enum": [
+                        "StudySite"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudySite",
+            "type": "object"
+        },
+        "StudyTitle": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyTitle",
+                    "enum": [
+                        "StudyTitle"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyTitle",
+            "type": "object"
+        },
+        "StudyVersion": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "abbreviations": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "administrableProducts": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "amendments": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "bcCategories": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "bcSurrogates": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "biomedicalConcepts": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "businessTherapeuticAreas": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "conditions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "dateValues": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "dictionaries": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "documentVersionIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "eligibilityCriterionItems": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "StudyVersion",
+                    "enum": [
+                        "StudyVersion"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "medicalDevices": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "narrativeContentItems": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "notes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "organizations": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "productOrganizationRoles": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "rationale": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "referenceIdentifiers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "roles": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "studyDesigns": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ],
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "studyIdentifiers": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "studyInterventions": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "titles": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "versionIdentifier": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyVersion",
+            "type": "object"
+        },
+        "SubjectEnrollment": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "forGeographicScope": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "forStudyCohortId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "forStudySiteId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "SubjectEnrollment",
+                    "enum": [
+                        "SubjectEnrollment"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "quantity": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "SubjectEnrollment",
+            "type": "object"
+        },
+        "Substance": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "codes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Substance",
+                    "enum": [
+                        "Substance"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "referenceSubstance": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "strengths": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Substance",
+            "type": "object"
+        },
+        "SyntaxTemplateDictionary": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "SyntaxTemplateDictionary",
+                    "enum": [
+                        "SyntaxTemplateDictionary"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parameterMaps": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "SyntaxTemplateDictionary",
+            "type": "object"
+        },
+        "Timing": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "Timing",
+                    "enum": [
+                        "Timing"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "relativeFromScheduledInstanceId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "relativeToFrom": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "relativeToScheduledInstanceId": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "value": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "valueLabel": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "windowLabel": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "windowLower": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "windowUpper": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Timing",
+            "type": "object"
+        },
+        "TransitionRule": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "extensionAttributes": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "instanceType": {
+                    "const": "TransitionRule",
+                    "enum": [
+                        "TransitionRule"
+                    ],
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "TransitionRule",
+            "type": "object"
+        },
+        "Wrapper": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "study": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "systemName": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "systemVersion": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "usdmVersion": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Wrapper",
+            "type": "object"
+        }
+    },
+    "$id": "https://www.cdisc.org/usdm",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "metamodel_version": "1.7.0",
+    "title": "usdm",
+    "type": "object",
+    "version": "4.0.0"
+}
+
