@@ -26,6 +26,9 @@ pip install -r requirements.txt
 # Run tests
 pytest
 
+# Regenerate output/usdm.yaml (a test fails if it is stale)
+python scripts/generate_schema.py
+
 # Run single test
 pytest path/to/test.py::test_function_name -v
 ```
@@ -39,8 +42,8 @@ pytest path/to/test.py::test_function_name -v
 ## Architecture
 
 **Transformation Pipeline:**
-1. Parse USDM OpenAPI specification (JSON)
-2. Map USDM Pydantic models to LinkML schema constructs
+1. Parse USDM OpenAPI specification (JSON) — the source of truth
+2. Map each OpenAPI schema (Input/Output variants collapsed) to a LinkML class with per-class `attributes`
 3. Generate LinkML YAML schemas
 4. Use LinkML generators to produce target formats
 

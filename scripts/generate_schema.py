@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Generate LinkML schema from USDM models."""
+"""Generate LinkML schema from the USDM OpenAPI specification."""
 
 import sys
 from pathlib import Path
@@ -16,14 +16,13 @@ def main():
     output_path = Path(__file__).parent.parent / "output" / "usdm.yaml"
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    print("Converting USDM models to LinkML schema...")
+    print("Converting USDM OpenAPI spec to LinkML schema...")
     converter = USDMToLinkMLConverter()
     converter.convert()
     converter.save(str(output_path))
 
     print(f"Generated LinkML schema: {output_path}")
     print(f"  - {len(converter.schema['classes'])} classes")
-    print(f"  - {len(converter.schema['slots'])} slots")
 
     return 0
 

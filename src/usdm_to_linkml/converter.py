@@ -1,348 +1,204 @@
-"""Convert USDM Pydantic models to LinkML schema."""
+"""Convert the USDM OpenAPI specification into a LinkML schema.
 
+The OpenAPI document (``files/USDM_API_v4.0.0.json``) is the source of truth.
+Every schema in ``components/schemas`` becomes a LinkML class whose
+``attributes`` mirror the OpenAPI properties, so that ranges, cardinality and
+required-ness are scoped per class (LinkML's global ``slots`` would otherwise
+force same-named attributes such as ``code`` to share one definition).
+
+Mapping rules
+-------------
+* ``X-Input`` / ``X-Output`` -> class ``X`` (the two variants are verified to
+  be structurally identical; a mismatch raises ``ValueError``).
+* ``type: array``            -> ``multivalued: true``
+* ``required`` list          -> ``required: true``; ``anyOf [.., null]`` and
+  properties not listed as required are optional.
+* ``$ref``                   -> class range, ``inlined: true`` (+ ``inlined_as_list``)
+* ``anyOf [$ref A, $ref B]`` -> ``any_of`` of class ranges
+* ``const``/single ``enum``  -> ``equals_string``; ``instanceType`` also gets
+  ``designates_type: true``
+* ``minLength: 1``           -> ``pattern`` requiring a non-empty string
+* ``format: uuid``           -> string with a UUID ``pattern``
+* ``format: date``           -> ``date``
+* ``id`` (required)          -> ``identifier: true``
+"""
+
+import json
 import re
-from typing import Any, Union, get_args, get_origin
-from uuid import UUID
+from pathlib import Path
+from typing import Any
 
 import yaml
-from pydantic import BaseModel
 
-import usdm_model
-from usdm_model.api_base_model import (
-    ApiBaseModel,
-    ApiBaseModelWithId,
-    ApiBaseModelWithIdAndDesc,
-    ApiBaseModelWithIdAndName,
-    ApiBaseModelWithIdNameAndLabel,
-    ApiBaseModelWithIdNameLabelAndDesc,
-    ApiBaseModelWithIdNameAndDesc,
-    ApiBaseModelWithIdOnly,
+DEFAULT_SPEC_PATH = (
+    Path(__file__).resolve().parents[2] / "files" / "USDM_API_v4.0.0.json"
 )
-from usdm_model.extension import (
-    Extension,
-    ExtensionAttribute,
-    ExtensionClass,
-    BaseCode,
-    BaseAliasCode,
-    BaseQuantity,
-    BaseRange,
+
+UUID_PATTERN = (
+    "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
 )
+NON_EMPTY_PATTERN = r"^[\s\S]+$"
+
+_VARIANT_SUFFIX = re.compile(r"-(Input|Output)$")
+
+
+def class_name(schema_name: str) -> str:
+    """Strip the ``-Input`` / ``-Output`` suffix from an OpenAPI schema name."""
+    return _VARIANT_SUFFIX.sub("", schema_name)
 
 
 class USDMToLinkMLConverter:
-    """Converts USDM Pydantic models to LinkML YAML schema."""
+    """Converts the USDM OpenAPI specification to a LinkML YAML schema."""
 
-    # Python types to LinkML ranges
+    # JSON Schema primitive -> LinkML range
     TYPE_MAP = {
-        str: "string",
-        int: "integer",
-        float: "float",
-        bool: "boolean",
-        UUID: "string",  # UUIDs are serialized as strings
+        "string": "string",
+        "integer": "integer",
+        "number": "float",
+        "boolean": "boolean",
     }
 
-    # Base model classes in inheritance order (most specific first)
-    BASE_CLASSES = [
-        ApiBaseModelWithIdNameLabelAndDesc,
-        ApiBaseModelWithIdNameAndLabel,
-        ApiBaseModelWithIdNameAndDesc,
-        ApiBaseModelWithIdAndDesc,
-        ApiBaseModelWithIdAndName,
-        ApiBaseModelWithId,
-        ApiBaseModelWithIdOnly,
-        ApiBaseModel,
-    ]
+    # FastAPI error envelopes, not part of the USDM data model
+    EXCLUDED_SCHEMAS = {"HTTPValidationError", "ValidationError"}
 
-    # Additional base classes from extension.py
-    EXTENSION_BASE_CLASSES = [
-        Extension,
-        ExtensionAttribute,
-        ExtensionClass,
-        BaseCode,
-        BaseAliasCode,
-        BaseQuantity,
-        BaseRange,
-    ]
-
-    def __init__(self):
-        """Initialize the converter."""
-        self.models: dict[str, type[BaseModel]] = {}
+    def __init__(self, spec_path: str | Path = DEFAULT_SPEC_PATH):
+        self.spec_path = Path(spec_path)
+        with open(self.spec_path) as f:
+            self.spec: dict[str, Any] = json.load(f)
+        self.schemas: dict[str, dict[str, Any]] = self._load_schemas()
         self.schema: dict[str, Any] = {}
-        self._discover_models()
 
-    def _discover_models(self) -> None:
-        """Discover all USDM model classes from the usdm_model package."""
-        # Get all models from __all__
-        for name in usdm_model.__all__:
-            cls = getattr(usdm_model, name, None)
-            if cls is not None and isinstance(cls, type) and issubclass(cls, BaseModel):
-                self.models[name] = cls
+    # ------------------------------------------------------------------ input
+    def _load_schemas(self) -> dict[str, dict[str, Any]]:
+        """Collapse Input/Output variants into one OpenAPI schema per class."""
+        raw = self.spec["components"]["schemas"]
+        grouped: dict[str, dict[str, dict[str, Any]]] = {}
+        for name, body in raw.items():
+            cname = class_name(name)
+            if cname in self.EXCLUDED_SCHEMAS:
+                continue
+            grouped.setdefault(cname, {})[name] = body
 
-        # Also add ConditionAssignment which is not in __all__ but is used
-        from usdm_model.scheduled_instance import ConditionAssignment
-        self.models["ConditionAssignment"] = ConditionAssignment
+        schemas: dict[str, dict[str, Any]] = {}
+        for cname, variants in grouped.items():
+            normalised = {
+                n: json.loads(
+                    re.sub(r"-(Input|Output)\"", '"', json.dumps(body))
+                )
+                for n, body in variants.items()
+            }
+            first = next(iter(normalised.values()))
+            if any(v != first for v in normalised.values()):
+                raise ValueError(
+                    f"Input/Output variants of {cname} differ; "
+                    "converter assumes they are identical"
+                )
+            schemas[cname] = first
+        return schemas
 
-        # Add base model classes
-        for cls in self.BASE_CLASSES:
-            self.models[cls.__name__] = cls
+    # ------------------------------------------------------------- conversion
+    def _range_of(self, node: dict[str, Any]) -> dict[str, Any]:
+        """Map a (non-array, non-null) JSON schema node to LinkML slot fields."""
+        if "$ref" in node:
+            target = class_name(node["$ref"].rsplit("/", 1)[-1])
+            return {"range": target, "inlined": True, "inlined_as_list": True}
 
-        # Add extension base classes
-        for cls in self.EXTENSION_BASE_CLASSES:
-            self.models[cls.__name__] = cls
-
-        # Add classes not in __all__ but referenced by other models
-        additional_classes = [
-            ("usdm_model.biospecimen_retention", "BiospecimenRetention"),
-            ("usdm_model.comment_annotation", "CommentAnnotation"),
-            ("usdm_model.assigned_person", "PersonName"),
-            ("usdm_model.ingredient", "Substance"),
-            ("usdm_model.study_amendment", "StudyChange"),
-            ("usdm_model.study_amendment", "StudyAmendmentImpact"),
-            ("usdm_model.medical_device", "MedicalDevice"),
-            ("usdm_model.product_organization_role", "ProductOrganizationRole"),
-        ]
-
-        for module_name, class_name in additional_classes:
-            try:
-                import importlib
-                module = importlib.import_module(module_name)
-                cls = getattr(module, class_name, None)
-                if cls is not None:
-                    self.models[class_name] = cls
-            except (ImportError, AttributeError):
-                pass
-
-    def _get_parent_class(self, cls: type) -> str | None:
-        """Get the LinkML parent class name for a Pydantic model."""
-        if cls is BaseModel:
-            return None
-
-        # Check direct bases
-        for base in cls.__bases__:
-            if base is BaseModel:
-                return None
-            if base.__name__ in self.models:
-                return base.__name__
-
-        return None
-
-    def _is_abstract_class(self, cls: type) -> bool:
-        """Determine if a class should be marked as abstract in LinkML."""
-        # Base API model classes are abstract
-        if cls in self.BASE_CLASSES:
-            return True
-        if cls in [Extension]:
-            return True
-        # Classes with subclasses that override instanceType are abstract
-        cls_name = cls.__name__
-        for model_cls in self.models.values():
-            if model_cls is not cls:
-                parent = self._get_parent_class(model_cls)
-                if parent == cls_name:
-                    # Check if the subclass has its own instanceType
-                    if "instanceType" in model_cls.model_fields:
-                        return True
-        return False
-
-    def _parse_type(self, field_type: Any) -> dict[str, Any]:
-        """Parse a Python type annotation into LinkML slot properties."""
         result: dict[str, Any] = {}
+        jtype = node.get("type", "string")
+        fmt = node.get("format")
+        if jtype == "string" and fmt == "date":
+            result["range"] = "date"
+        else:
+            result["range"] = self.TYPE_MAP[jtype]
+        if fmt == "uuid":
+            result["pattern"] = UUID_PATTERN
+        if node.get("minLength") == 1:
+            result["pattern"] = NON_EMPTY_PATTERN
+        elif "minLength" in node:
+            raise ValueError(f"Unsupported minLength: {node['minLength']}")
 
-        origin = get_origin(field_type)
-        args = get_args(field_type)
-
-        # Handle Literal types (e.g., Literal["Study"])
-        if origin is type(None):
-            result["range"] = "string"
-            return result
-
-        # Handle Literal
-        try:
-            from typing import Literal
-            if origin is Literal:
-                result["range"] = "string"
-                if args:
-                    result["equals_string"] = args[0]
-                return result
-        except ImportError:
-            pass
-
-        # Handle Union types
-        if origin is Union:
-            non_none_args = [a for a in args if a is not type(None)]
-            if len(non_none_args) == 0:
-                result["range"] = "string"
-            elif len(non_none_args) == 1:
-                # Optional[X] -> X with required: false
-                inner_result = self._parse_type(non_none_args[0])
-                result.update(inner_result)
-                result["required"] = False
-            else:
-                # Union of multiple non-None types
-                any_of = []
-                for arg in non_none_args:
-                    inner = self._parse_type(arg)
-                    any_of.append({"range": inner.get("range", "string")})
-                result["any_of"] = any_of
-            return result
-
-        # Handle List types
-        if origin is list:
-            result["multivalued"] = True
-            if args:
-                inner_result = self._parse_type(args[0])
-                result.update(inner_result)
-                # Keep multivalued even if inner type sets something
-                result["multivalued"] = True
-            else:
-                result["range"] = "string"
-            return result
-
-        # Handle primitive types
-        if field_type in self.TYPE_MAP:
-            result["range"] = self.TYPE_MAP[field_type]
-            return result
-
-        # Handle USDM model references
-        if isinstance(field_type, type):
-            if field_type.__name__ in self.models:
-                result["range"] = field_type.__name__
-                return result
-            if issubclass(field_type, BaseModel):
-                result["range"] = field_type.__name__
-                return result
-
-        # Default to string
-        result["range"] = "string"
+        const = node.get("const")
+        if const is None and len(node.get("enum", [])) == 1:
+            const = node["enum"][0]
+        if const is not None:
+            result["equals_string"] = const
+        elif "enum" in node:
+            raise ValueError(f"Multi-valued enum not supported: {node['enum']}")
         return result
 
-    def _is_id_reference(self, field_name: str) -> tuple[bool, str | None]:
-        """Check if a field name indicates an ID reference and infer the target class."""
-        if field_name.endswith("Ids"):
-            # pluralIds -> infer singular class name
-            base = field_name[:-3]  # Remove "Ids"
-            # Convert camelCase to class name possibilities
-            candidates = self._infer_class_names(base)
-            for candidate in candidates:
-                if candidate in self.models:
-                    return True, candidate
-            return True, None
-        elif field_name.endswith("Id") and field_name != "id":
-            # singularId -> infer class name
-            base = field_name[:-2]  # Remove "Id"
-            candidates = self._infer_class_names(base)
-            for candidate in candidates:
-                if candidate in self.models:
-                    return True, candidate
-            return True, None
-        return False, None
+    def _union_of(self, options: list[dict[str, Any]]) -> dict[str, Any]:
+        """Map one or more non-null alternatives to LinkML slot fields."""
+        if len(options) == 1:
+            return self._range_of(options[0])
+        parts = [self._range_of(o) for o in options]
+        if not all("$ref" in o for o in options):
+            raise ValueError(f"Unsupported union of non-class types: {options}")
+        return {
+            "range": "Any",
+            "any_of": [{"range": p["range"]} for p in parts],
+            "inlined": True,
+            "inlined_as_list": True,
+        }
 
-    def _infer_class_names(self, base: str) -> list[str]:
-        """Infer possible class names from a base field name."""
-        candidates = []
-        # Direct match with first letter capitalized
-        candidates.append(base[0].upper() + base[1:] if base else base)
-        # Try adding common prefixes
-        for prefix in ["Study", "Schedule", "Administrable"]:
-            if base.lower().startswith(prefix.lower()):
-                continue
-            candidates.append(prefix + base[0].upper() + base[1:])
-        return candidates
+    def _convert_property(
+        self, name: str, prop: dict[str, Any], required: bool
+    ) -> dict[str, Any]:
+        node = prop
+        if "anyOf" in node:
+            options = [o for o in node["anyOf"] if o.get("type") != "null"]
+            node = {"anyOf": options}
+        else:
+            node = {"anyOf": [node]}
 
-    def _convert_class(self, name: str, cls: type) -> dict[str, Any]:
-        """Convert a single Pydantic model to a LinkML class definition."""
-        class_def: dict[str, Any] = {}
+        options = node["anyOf"]
+        multivalued = False
+        if len(options) == 1 and options[0].get("type") == "array":
+            multivalued = True
+            items = options[0]["items"]
+            options = items["anyOf"] if "anyOf" in items else [items]
 
-        # Set parent class
-        parent = self._get_parent_class(cls)
-        if parent:
-            class_def["is_a"] = parent
+        attr = self._union_of(options)
+        if multivalued:
+            attr["multivalued"] = True
+        elif "inlined_as_list" in attr:
+            del attr["inlined_as_list"]  # only meaningful for lists
 
-        # Check if abstract
-        if self._is_abstract_class(cls):
-            class_def["abstract"] = True
+        if name == "id" and required and attr["range"] in ("string",):
+            attr["identifier"] = True
+        if name == "instanceType":
+            attr["designates_type"] = True
+        # Keep the attribute definition in a stable, readable key order
+        attr["required"] = required
+        return attr
 
-        # Get slots from model_fields
-        slots = []
-        slot_usage = {}
-
-        for field_name, field_info in cls.model_fields.items():
-            # Check if field is inherited from parent
-            is_inherited = False
-            if parent and parent in self.models:
-                parent_cls = self.models[parent]
-                if field_name in parent_cls.model_fields:
-                    is_inherited = True
-
-            # Handle instanceType specially - add to slot_usage with equals_string
-            if field_name == "instanceType":
-                slot_props = self._parse_type(field_info.annotation)
-                if "equals_string" in slot_props:
-                    slot_usage["instanceType"] = {
-                        "equals_string": slot_props["equals_string"]
-                    }
-                # Only add to slots list if not inherited
-                if not is_inherited:
-                    slots.append(field_name)
-                continue
-
-            # Skip other inherited fields
-            if is_inherited:
-                continue
-
-            slots.append(field_name)
-
-        if slots:
-            class_def["slots"] = slots
-
-        if slot_usage:
-            class_def["slot_usage"] = slot_usage
-
-        return class_def
-
-    def _convert_slot(self, field_name: str, field_info: Any, owner_class: str) -> dict[str, Any]:
-        """Convert a Pydantic field to a LinkML slot definition."""
-        slot_def: dict[str, Any] = {}
-
-        # Parse the type
-        type_info = self._parse_type(field_info.annotation)
-        slot_def.update(type_info)
-
-        # Check for ID references
-        is_ref, target_class = self._is_id_reference(field_name)
-        if is_ref:
-            slot_def["inlined"] = False
-            if target_class:
-                slot_def["range"] = target_class
-
-        # Handle special fields
-        if field_name == "id":
-            slot_def["identifier"] = True
-            slot_def["range"] = "string"
-        elif field_name == "instanceType":
-            slot_def["designates_type"] = True
-            # Remove equals_string from global slot - it belongs in slot_usage per class
-            slot_def.pop("equals_string", None)
-            slot_def["range"] = "string"
-
-        # Check if required (has no default or default is not None)
-        if field_info.default is None and field_info.default_factory is None:
-            if "required" not in slot_def:
-                slot_def["required"] = True
-        elif field_info.default is not None or field_info.default_factory is not None:
-            # Has a default value, so not strictly required
-            if "required" not in slot_def:
-                slot_def["required"] = False
-
-        return slot_def
+    def _convert_class(self, cname: str, body: dict[str, Any]) -> dict[str, Any]:
+        required = set(body.get("required", []))
+        attributes = {
+            pname: self._convert_property(pname, prop, pname in required)
+            for pname, prop in body.get("properties", {}).items()
+        }
+        return {"attributes": attributes}
 
     def convert(self) -> dict[str, Any]:
-        """Convert all USDM models to a LinkML schema."""
+        """Build the LinkML schema dictionary."""
+        info = self.spec.get("info", {})
+        classes = {
+            cname: self._convert_class(cname, body)
+            for cname, body in sorted(self.schemas.items())
+        }
+
+        any_used = any(
+            a.get("range") == "Any"
+            for c in classes.values()
+            for a in c["attributes"].values()
+        )
         self.schema = {
             "id": "https://www.cdisc.org/usdm",
             "name": "usdm",
             "title": "Unified Study Definitions Model",
-            "version": "4.0.0",
+            "description": info.get("description")
+            or "Generated from the USDM OpenAPI specification.",
+            "version": info.get("version", "4.0.0"),
             "prefixes": {
                 "usdm": "https://www.cdisc.org/usdm/",
                 "linkml": "https://w3id.org/linkml/",
@@ -350,42 +206,21 @@ class USDMToLinkMLConverter:
             "default_prefix": "usdm",
             "default_range": "string",
             "imports": ["linkml:types"],
-            "classes": {},
-            "slots": {},
+            "classes": classes,
         }
-
-        # First pass: collect all slots from all classes
-        all_slots: dict[str, dict[str, Any]] = {}
-
-        for name, cls in sorted(self.models.items()):
-            for field_name, field_info in cls.model_fields.items():
-                if field_name not in all_slots:
-                    all_slots[field_name] = self._convert_slot(field_name, field_info, name)
-
-        # Add global slots
-        self.schema["slots"] = all_slots
-
-        # Second pass: convert classes
-        for name, cls in sorted(self.models.items()):
-            class_def = self._convert_class(name, cls)
-            if class_def:  # Only add non-empty class definitions
-                self.schema["classes"][name] = class_def
-
+        if any_used:
+            # 'Any' is the range of union-typed slots; any_of narrows it.
+            self.schema["classes"] = {
+                "Any": {"class_uri": "linkml:Any", "abstract": True},
+                **classes,
+            }
         return self.schema
 
+    # ----------------------------------------------------------------- output
     def to_yaml(self) -> str:
-        """Convert the schema to YAML string."""
+        """Convert the schema to a YAML string."""
         if not self.schema:
             self.convert()
-
-        # Custom representer for cleaner YAML output
-        def str_representer(dumper, data):
-            if '\n' in data:
-                return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|')
-            return dumper.represent_scalar('tag:yaml.org,2002:str', data)
-
-        yaml.add_representer(str, str_representer)
-
         return yaml.dump(
             self.schema,
             default_flow_style=False,
@@ -394,11 +229,10 @@ class USDMToLinkMLConverter:
             width=120,
         )
 
-    def save(self, path: str) -> None:
+    def save(self, path: str | Path) -> None:
         """Save the schema to a YAML file."""
-        yaml_content = self.to_yaml()
         with open(path, "w") as f:
-            f.write(yaml_content)
+            f.write(self.to_yaml())
 
 
 def main():
@@ -407,7 +241,6 @@ def main():
     converter.convert()
     converter.save("output/usdm.yaml")
     print(f"Generated LinkML schema with {len(converter.schema['classes'])} classes")
-    print(f"and {len(converter.schema['slots'])} slots")
 
 
 if __name__ == "__main__":
