@@ -1,0 +1,57 @@
+name: Generate outputs
+
+# After a merge to main, regenerate the schemas, ER diagram and docs from the
+# OpenAPI spec and commit any changes back to main.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Only one run at a time; a newer merge waits instead of racing the commit-back.
+concurrency:
+  group: generate-outputs
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    # The commit-back is pushed with a personal access token, and (unlike
+    # GITHUB_TOKEN pushes) that DOES trigger workflows. Its message contains
+    # [skip ci], which GitHub honours; this condition is a second guard
+    # against a regenerate -> push -> regenerate loop.
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    runs-on: ubuntu-latest
+    steps:
+      # main requires pull requests, so the push needs a token that can bypass
+      # that rule (the repository admin's fine-grained PAT; see README).
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GENERATE_PAT }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate usdm.yaml and usdm.schema.json
+        run: python scripts/generate_schema.py
+
+      - name: Generate ER diagram and documentation
+        run: python scripts/generate_docs.py
+
+      - name: Commit and push changes
+        run: |
+          git add output
+          if git diff --cached --quiet; then
+            echo "Generated outputs are already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Regenerate outputs from USDM spec [skip ci]"
+          git push
