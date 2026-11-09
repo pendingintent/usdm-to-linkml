@@ -3,7 +3,8 @@
 
 Writes:
   output/usdm.erdiagram.md   Mermaid ER diagram (gen-erdiagram)
-  output/docs/               Markdown documentation, one page per class/slot (gen-doc)
+  output/docs/               Markdown documentation (gen-doc), in classes/, slots/,
+                             types/ and schemas/ subfolders
 
 Run ``python scripts/generate_schema.py`` first so usdm.yaml is current.
 """
@@ -24,6 +25,10 @@ DOCS = OUTPUT / "docs"
 # runs. A fixed hash seed makes the output byte-for-byte reproducible so that
 # regenerating does not create spurious diffs.
 ENV = {**os.environ, "PYTHONHASHSEED": "0"}
+
+# Some names are both a class and a slot (Code/code, Study/study, ...). In one
+# flat folder those pages collide on case-insensitive filesystems (macOS,
+# Windows), so gen-doc puts each kind of page in its own subfolder.
 
 
 def tool(name: str) -> str:
@@ -48,10 +53,10 @@ def main() -> int:
     if DOCS.exists():
         shutil.rmtree(DOCS)  # drop pages for classes/slots that no longer exist
     subprocess.run(
-        [tool("gen-doc"), str(SCHEMA), "-d", str(DOCS)],
+        [tool("gen-doc"), str(SCHEMA), "-d", str(DOCS), "--subfolder-type-separation"],
         env=ENV, check=True, capture_output=True, text=True,
     )
-    print(f"  {DOCS} ({sum(1 for _ in DOCS.glob('*.md'))} pages)")
+    print(f"  {DOCS} ({sum(1 for _ in DOCS.rglob('*.md'))} pages)")
     return 0
 
 

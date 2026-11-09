@@ -1,0 +1,1144 @@
+
+
+# Class: BiomedicalConceptProperty 
+
+
+
+URI: [usdm:class/BiomedicalConceptProperty](https://www.cdisc.org/usdm/class/BiomedicalConceptProperty)
+
+
+
+
+
+```mermaid
+ classDiagram
+    class BiomedicalConceptProperty
+    click BiomedicalConceptProperty href "../../classes/BiomedicalConceptProperty/"
+      BiomedicalConceptProperty : code
+        
+          
+    
+        
+        
+        BiomedicalConceptProperty --> "1" AliasCode : code
+        click AliasCode href "../../classes/AliasCode/"
+    
+
+        
+      BiomedicalConceptProperty : datatype
+        
+      BiomedicalConceptProperty : extensionAttributes
+        
+          
+    
+        
+        
+        BiomedicalConceptProperty --> "*" ExtensionAttribute : extensionAttributes
+        click ExtensionAttribute href "../../classes/ExtensionAttribute/"
+    
+
+        
+      BiomedicalConceptProperty : id
+        
+      BiomedicalConceptProperty : instanceType
+        
+      BiomedicalConceptProperty : isEnabled
+        
+      BiomedicalConceptProperty : isRequired
+        
+      BiomedicalConceptProperty : label
+        
+      BiomedicalConceptProperty : name
+        
+      BiomedicalConceptProperty : notes
+        
+          
+    
+        
+        
+        BiomedicalConceptProperty --> "*" CommentAnnotation : notes
+        click CommentAnnotation href "../../classes/CommentAnnotation/"
+    
+
+        
+      BiomedicalConceptProperty : responseCodes
+        
+          
+    
+        
+        
+        BiomedicalConceptProperty --> "*" ResponseCode : responseCodes
+        click ResponseCode href "../../classes/ResponseCode/"
+    
+
+        
+      
+```
+
+
+
+
+<!-- no inheritance hierarchy -->
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [id](../slots/id.md) | 1 <br/> [String](../types/String.md) |  | direct |
+| [extensionAttributes](../slots/extensionAttributes.md) | * <br/> [ExtensionAttribute](../classes/ExtensionAttribute.md) |  | direct |
+| [name](../slots/name.md) | 1 <br/> [String](../types/String.md) |  | direct |
+| [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md) |  | direct |
+| [isRequired](../slots/isRequired.md) | 1 <br/> [Boolean](../types/Boolean.md) |  | direct |
+| [isEnabled](../slots/isEnabled.md) | 1 <br/> [Boolean](../types/Boolean.md) |  | direct |
+| [datatype](../slots/datatype.md) | 1 <br/> [String](../types/String.md) |  | direct |
+| [responseCodes](../slots/responseCodes.md) | * <br/> [ResponseCode](../classes/ResponseCode.md) |  | direct |
+| [code](../slots/code.md) | 1 <br/> [AliasCode](../classes/AliasCode.md) |  | direct |
+| [notes](../slots/notes.md) | * <br/> [CommentAnnotation](../classes/CommentAnnotation.md) |  | direct |
+| [instanceType](../slots/instanceType.md) | 1 <br/> [String](../types/String.md) |  | direct |
+
+
+
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [BiomedicalConcept](../classes/BiomedicalConcept.md) | [properties](../slots/properties.md) | range | [BiomedicalConceptProperty](../classes/BiomedicalConceptProperty.md) |
+
+
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://www.cdisc.org/usdm
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | usdm:BiomedicalConceptProperty |
+| native | usdm:BiomedicalConceptProperty |
+
+
+
+
+
+
+## LinkML Source
+
+<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
+
+### Direct
+
+<details>
+```yaml
+name: BiomedicalConceptProperty
+from_schema: https://www.cdisc.org/usdm
+attributes:
+  id:
+    name: id
+    from_schema: https://www.cdisc.org/usdm
+    identifier: true
+    domain_of:
+    - Abbreviation
+    - Activity
+    - Address
+    - AdministrableProduct
+    - AdministrableProductIdentifier
+    - AdministrableProductProperty
+    - Administration
+    - AliasCode
+    - AnalysisPopulation
+    - AssignedPerson
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - BiospecimenRetention
+    - Characteristic
+    - Code
+    - CommentAnnotation
+    - Condition
+    - ConditionAssignment
+    - DocumentContentReference
+    - Duration
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - ExtensionAttribute
+    - ExtensionClass
+    - GeographicScope
+    - GovernanceDate
+    - Indication
+    - Ingredient
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - Masking
+    - MedicalDevice
+    - MedicalDeviceIdentifier
+    - NarrativeContent
+    - NarrativeContentItem
+    - Objective
+    - ObservationalStudyDesign
+    - Organization
+    - ParameterMap
+    - PersonName
+    - Procedure
+    - ProductOrganizationRole
+    - Quantity
+    - Range
+    - ReferenceIdentifier
+    - ResponseCode
+    - ScheduleTimeline
+    - ScheduleTimelineExit
+    - ScheduledActivityInstance
+    - ScheduledDecisionInstance
+    - Strength
+    - Study
+    - StudyAmendment
+    - StudyAmendmentImpact
+    - StudyAmendmentReason
+    - StudyArm
+    - StudyCell
+    - StudyChange
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDefinitionDocumentVersion
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIdentifier
+    - StudyIntervention
+    - StudyRole
+    - StudySite
+    - StudyTitle
+    - StudyVersion
+    - SubjectEnrollment
+    - Substance
+    - SyntaxTemplateDictionary
+    - Timing
+    - TransitionRule
+    range: string
+    required: true
+    pattern: ^[\s\S]+$
+  extensionAttributes:
+    name: extensionAttributes
+    from_schema: https://www.cdisc.org/usdm
+    domain_of:
+    - Abbreviation
+    - Activity
+    - Address
+    - AdministrableProduct
+    - AdministrableProductIdentifier
+    - AdministrableProductProperty
+    - Administration
+    - AliasCode
+    - AnalysisPopulation
+    - AssignedPerson
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - BiospecimenRetention
+    - Characteristic
+    - Code
+    - CommentAnnotation
+    - Condition
+    - ConditionAssignment
+    - DocumentContentReference
+    - Duration
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - ExtensionAttribute
+    - ExtensionClass
+    - GeographicScope
+    - GovernanceDate
+    - Indication
+    - Ingredient
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - Masking
+    - MedicalDevice
+    - MedicalDeviceIdentifier
+    - NarrativeContent
+    - NarrativeContentItem
+    - Objective
+    - ObservationalStudyDesign
+    - Organization
+    - ParameterMap
+    - PersonName
+    - Procedure
+    - ProductOrganizationRole
+    - Quantity
+    - Range
+    - ReferenceIdentifier
+    - ResponseCode
+    - ScheduleTimeline
+    - ScheduleTimelineExit
+    - ScheduledActivityInstance
+    - ScheduledDecisionInstance
+    - Strength
+    - Study
+    - StudyAmendment
+    - StudyAmendmentImpact
+    - StudyAmendmentReason
+    - StudyArm
+    - StudyCell
+    - StudyChange
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDefinitionDocumentVersion
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIdentifier
+    - StudyIntervention
+    - StudyRole
+    - StudySite
+    - StudyTitle
+    - StudyVersion
+    - SubjectEnrollment
+    - Substance
+    - SyntaxTemplateDictionary
+    - Timing
+    - TransitionRule
+    range: ExtensionAttribute
+    required: false
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  name:
+    name: name
+    from_schema: https://www.cdisc.org/usdm
+    domain_of:
+    - Activity
+    - AdministrableProduct
+    - AdministrableProductProperty
+    - Administration
+    - AnalysisPopulation
+    - AssignedPerson
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - BiospecimenRetention
+    - Characteristic
+    - Condition
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - GovernanceDate
+    - Indication
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - MedicalDevice
+    - NarrativeContent
+    - NarrativeContentItem
+    - Objective
+    - ObservationalStudyDesign
+    - Organization
+    - Procedure
+    - ProductOrganizationRole
+    - ResponseCode
+    - ScheduleTimeline
+    - ScheduledActivityInstance
+    - ScheduledDecisionInstance
+    - Strength
+    - Study
+    - StudyAmendment
+    - StudyArm
+    - StudyChange
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIntervention
+    - StudyRole
+    - StudySite
+    - SubjectEnrollment
+    - Substance
+    - SyntaxTemplateDictionary
+    - Timing
+    - TransitionRule
+    range: string
+    required: true
+    pattern: ^[\s\S]+$
+  label:
+    name: label
+    from_schema: https://www.cdisc.org/usdm
+    domain_of:
+    - Activity
+    - AdministrableProduct
+    - Administration
+    - AnalysisPopulation
+    - AssignedPerson
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - BiospecimenRetention
+    - Characteristic
+    - Condition
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - GovernanceDate
+    - Indication
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - MedicalDevice
+    - Objective
+    - ObservationalStudyDesign
+    - Organization
+    - Procedure
+    - ProductOrganizationRole
+    - ResponseCode
+    - ScheduleTimeline
+    - ScheduledActivityInstance
+    - ScheduledDecisionInstance
+    - Strength
+    - Study
+    - StudyAmendment
+    - StudyArm
+    - StudyChange
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIntervention
+    - StudyRole
+    - StudySite
+    - SubjectEnrollment
+    - Substance
+    - SyntaxTemplateDictionary
+    - Timing
+    - TransitionRule
+    range: string
+    required: false
+  isRequired:
+    name: isRequired
+    from_schema: https://www.cdisc.org/usdm
+    rank: 1000
+    domain_of:
+    - BiomedicalConceptProperty
+    range: boolean
+    required: true
+  isEnabled:
+    name: isEnabled
+    from_schema: https://www.cdisc.org/usdm
+    rank: 1000
+    domain_of:
+    - BiomedicalConceptProperty
+    - ResponseCode
+    range: boolean
+    required: true
+  datatype:
+    name: datatype
+    from_schema: https://www.cdisc.org/usdm
+    rank: 1000
+    domain_of:
+    - BiomedicalConceptProperty
+    range: string
+    required: true
+  responseCodes:
+    name: responseCodes
+    from_schema: https://www.cdisc.org/usdm
+    rank: 1000
+    domain_of:
+    - BiomedicalConceptProperty
+    range: ResponseCode
+    required: false
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  code:
+    name: code
+    from_schema: https://www.cdisc.org/usdm
+    domain_of:
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - Code
+    - GeographicScope
+    - Procedure
+    - ProductOrganizationRole
+    - ResponseCode
+    - StudyAmendmentReason
+    - StudyRole
+    range: AliasCode
+    required: true
+    inlined: true
+  notes:
+    name: notes
+    from_schema: https://www.cdisc.org/usdm
+    domain_of:
+    - Abbreviation
+    - Activity
+    - AdministrableProduct
+    - Administration
+    - AnalysisPopulation
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - Characteristic
+    - Condition
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - Indication
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - MedicalDevice
+    - Objective
+    - ObservationalStudyDesign
+    - Procedure
+    - StudyAmendment
+    - StudyAmendmentImpact
+    - StudyArm
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDefinitionDocumentVersion
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIntervention
+    - StudyRole
+    - StudyVersion
+    range: CommentAnnotation
+    required: false
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  instanceType:
+    name: instanceType
+    from_schema: https://www.cdisc.org/usdm
+    designates_type: true
+    domain_of:
+    - Abbreviation
+    - Activity
+    - Address
+    - AdministrableProduct
+    - AdministrableProductIdentifier
+    - AdministrableProductProperty
+    - Administration
+    - AliasCode
+    - AnalysisPopulation
+    - AssignedPerson
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - BiospecimenRetention
+    - Characteristic
+    - Code
+    - CommentAnnotation
+    - Condition
+    - ConditionAssignment
+    - DocumentContentReference
+    - Duration
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - ExtensionAttribute
+    - ExtensionClass
+    - GeographicScope
+    - GovernanceDate
+    - Indication
+    - Ingredient
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - Masking
+    - MedicalDevice
+    - MedicalDeviceIdentifier
+    - NarrativeContent
+    - NarrativeContentItem
+    - Objective
+    - ObservationalStudyDesign
+    - Organization
+    - ParameterMap
+    - PersonName
+    - Procedure
+    - ProductOrganizationRole
+    - Quantity
+    - Range
+    - ReferenceIdentifier
+    - ResponseCode
+    - ScheduleTimeline
+    - ScheduleTimelineExit
+    - ScheduledActivityInstance
+    - ScheduledDecisionInstance
+    - Strength
+    - Study
+    - StudyAmendment
+    - StudyAmendmentImpact
+    - StudyAmendmentReason
+    - StudyArm
+    - StudyCell
+    - StudyChange
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDefinitionDocumentVersion
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIdentifier
+    - StudyIntervention
+    - StudyRole
+    - StudySite
+    - StudyTitle
+    - StudyVersion
+    - SubjectEnrollment
+    - Substance
+    - SyntaxTemplateDictionary
+    - Timing
+    - TransitionRule
+    range: string
+    required: true
+    equals_string: BiomedicalConceptProperty
+
+```
+</details>
+
+### Induced
+
+<details>
+```yaml
+name: BiomedicalConceptProperty
+from_schema: https://www.cdisc.org/usdm
+attributes:
+  id:
+    name: id
+    from_schema: https://www.cdisc.org/usdm
+    identifier: true
+    alias: id
+    owner: BiomedicalConceptProperty
+    domain_of:
+    - Abbreviation
+    - Activity
+    - Address
+    - AdministrableProduct
+    - AdministrableProductIdentifier
+    - AdministrableProductProperty
+    - Administration
+    - AliasCode
+    - AnalysisPopulation
+    - AssignedPerson
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - BiospecimenRetention
+    - Characteristic
+    - Code
+    - CommentAnnotation
+    - Condition
+    - ConditionAssignment
+    - DocumentContentReference
+    - Duration
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - ExtensionAttribute
+    - ExtensionClass
+    - GeographicScope
+    - GovernanceDate
+    - Indication
+    - Ingredient
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - Masking
+    - MedicalDevice
+    - MedicalDeviceIdentifier
+    - NarrativeContent
+    - NarrativeContentItem
+    - Objective
+    - ObservationalStudyDesign
+    - Organization
+    - ParameterMap
+    - PersonName
+    - Procedure
+    - ProductOrganizationRole
+    - Quantity
+    - Range
+    - ReferenceIdentifier
+    - ResponseCode
+    - ScheduleTimeline
+    - ScheduleTimelineExit
+    - ScheduledActivityInstance
+    - ScheduledDecisionInstance
+    - Strength
+    - Study
+    - StudyAmendment
+    - StudyAmendmentImpact
+    - StudyAmendmentReason
+    - StudyArm
+    - StudyCell
+    - StudyChange
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDefinitionDocumentVersion
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIdentifier
+    - StudyIntervention
+    - StudyRole
+    - StudySite
+    - StudyTitle
+    - StudyVersion
+    - SubjectEnrollment
+    - Substance
+    - SyntaxTemplateDictionary
+    - Timing
+    - TransitionRule
+    range: string
+    required: true
+    pattern: ^[\s\S]+$
+  extensionAttributes:
+    name: extensionAttributes
+    from_schema: https://www.cdisc.org/usdm
+    alias: extensionAttributes
+    owner: BiomedicalConceptProperty
+    domain_of:
+    - Abbreviation
+    - Activity
+    - Address
+    - AdministrableProduct
+    - AdministrableProductIdentifier
+    - AdministrableProductProperty
+    - Administration
+    - AliasCode
+    - AnalysisPopulation
+    - AssignedPerson
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - BiospecimenRetention
+    - Characteristic
+    - Code
+    - CommentAnnotation
+    - Condition
+    - ConditionAssignment
+    - DocumentContentReference
+    - Duration
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - ExtensionAttribute
+    - ExtensionClass
+    - GeographicScope
+    - GovernanceDate
+    - Indication
+    - Ingredient
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - Masking
+    - MedicalDevice
+    - MedicalDeviceIdentifier
+    - NarrativeContent
+    - NarrativeContentItem
+    - Objective
+    - ObservationalStudyDesign
+    - Organization
+    - ParameterMap
+    - PersonName
+    - Procedure
+    - ProductOrganizationRole
+    - Quantity
+    - Range
+    - ReferenceIdentifier
+    - ResponseCode
+    - ScheduleTimeline
+    - ScheduleTimelineExit
+    - ScheduledActivityInstance
+    - ScheduledDecisionInstance
+    - Strength
+    - Study
+    - StudyAmendment
+    - StudyAmendmentImpact
+    - StudyAmendmentReason
+    - StudyArm
+    - StudyCell
+    - StudyChange
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDefinitionDocumentVersion
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIdentifier
+    - StudyIntervention
+    - StudyRole
+    - StudySite
+    - StudyTitle
+    - StudyVersion
+    - SubjectEnrollment
+    - Substance
+    - SyntaxTemplateDictionary
+    - Timing
+    - TransitionRule
+    range: ExtensionAttribute
+    required: false
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  name:
+    name: name
+    from_schema: https://www.cdisc.org/usdm
+    alias: name
+    owner: BiomedicalConceptProperty
+    domain_of:
+    - Activity
+    - AdministrableProduct
+    - AdministrableProductProperty
+    - Administration
+    - AnalysisPopulation
+    - AssignedPerson
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - BiospecimenRetention
+    - Characteristic
+    - Condition
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - GovernanceDate
+    - Indication
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - MedicalDevice
+    - NarrativeContent
+    - NarrativeContentItem
+    - Objective
+    - ObservationalStudyDesign
+    - Organization
+    - Procedure
+    - ProductOrganizationRole
+    - ResponseCode
+    - ScheduleTimeline
+    - ScheduledActivityInstance
+    - ScheduledDecisionInstance
+    - Strength
+    - Study
+    - StudyAmendment
+    - StudyArm
+    - StudyChange
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIntervention
+    - StudyRole
+    - StudySite
+    - SubjectEnrollment
+    - Substance
+    - SyntaxTemplateDictionary
+    - Timing
+    - TransitionRule
+    range: string
+    required: true
+    pattern: ^[\s\S]+$
+  label:
+    name: label
+    from_schema: https://www.cdisc.org/usdm
+    alias: label
+    owner: BiomedicalConceptProperty
+    domain_of:
+    - Activity
+    - AdministrableProduct
+    - Administration
+    - AnalysisPopulation
+    - AssignedPerson
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - BiospecimenRetention
+    - Characteristic
+    - Condition
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - GovernanceDate
+    - Indication
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - MedicalDevice
+    - Objective
+    - ObservationalStudyDesign
+    - Organization
+    - Procedure
+    - ProductOrganizationRole
+    - ResponseCode
+    - ScheduleTimeline
+    - ScheduledActivityInstance
+    - ScheduledDecisionInstance
+    - Strength
+    - Study
+    - StudyAmendment
+    - StudyArm
+    - StudyChange
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIntervention
+    - StudyRole
+    - StudySite
+    - SubjectEnrollment
+    - Substance
+    - SyntaxTemplateDictionary
+    - Timing
+    - TransitionRule
+    range: string
+    required: false
+  isRequired:
+    name: isRequired
+    from_schema: https://www.cdisc.org/usdm
+    rank: 1000
+    alias: isRequired
+    owner: BiomedicalConceptProperty
+    domain_of:
+    - BiomedicalConceptProperty
+    range: boolean
+    required: true
+  isEnabled:
+    name: isEnabled
+    from_schema: https://www.cdisc.org/usdm
+    rank: 1000
+    alias: isEnabled
+    owner: BiomedicalConceptProperty
+    domain_of:
+    - BiomedicalConceptProperty
+    - ResponseCode
+    range: boolean
+    required: true
+  datatype:
+    name: datatype
+    from_schema: https://www.cdisc.org/usdm
+    rank: 1000
+    alias: datatype
+    owner: BiomedicalConceptProperty
+    domain_of:
+    - BiomedicalConceptProperty
+    range: string
+    required: true
+  responseCodes:
+    name: responseCodes
+    from_schema: https://www.cdisc.org/usdm
+    rank: 1000
+    alias: responseCodes
+    owner: BiomedicalConceptProperty
+    domain_of:
+    - BiomedicalConceptProperty
+    range: ResponseCode
+    required: false
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  code:
+    name: code
+    from_schema: https://www.cdisc.org/usdm
+    alias: code
+    owner: BiomedicalConceptProperty
+    domain_of:
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - Code
+    - GeographicScope
+    - Procedure
+    - ProductOrganizationRole
+    - ResponseCode
+    - StudyAmendmentReason
+    - StudyRole
+    range: AliasCode
+    required: true
+    inlined: true
+  notes:
+    name: notes
+    from_schema: https://www.cdisc.org/usdm
+    alias: notes
+    owner: BiomedicalConceptProperty
+    domain_of:
+    - Abbreviation
+    - Activity
+    - AdministrableProduct
+    - Administration
+    - AnalysisPopulation
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - Characteristic
+    - Condition
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - Indication
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - MedicalDevice
+    - Objective
+    - ObservationalStudyDesign
+    - Procedure
+    - StudyAmendment
+    - StudyAmendmentImpact
+    - StudyArm
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDefinitionDocumentVersion
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIntervention
+    - StudyRole
+    - StudyVersion
+    range: CommentAnnotation
+    required: false
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  instanceType:
+    name: instanceType
+    from_schema: https://www.cdisc.org/usdm
+    designates_type: true
+    alias: instanceType
+    owner: BiomedicalConceptProperty
+    domain_of:
+    - Abbreviation
+    - Activity
+    - Address
+    - AdministrableProduct
+    - AdministrableProductIdentifier
+    - AdministrableProductProperty
+    - Administration
+    - AliasCode
+    - AnalysisPopulation
+    - AssignedPerson
+    - BiomedicalConcept
+    - BiomedicalConceptCategory
+    - BiomedicalConceptProperty
+    - BiomedicalConceptSurrogate
+    - BiospecimenRetention
+    - Characteristic
+    - Code
+    - CommentAnnotation
+    - Condition
+    - ConditionAssignment
+    - DocumentContentReference
+    - Duration
+    - EligibilityCriterion
+    - EligibilityCriterionItem
+    - Encounter
+    - Endpoint
+    - Estimand
+    - ExtensionAttribute
+    - ExtensionClass
+    - GeographicScope
+    - GovernanceDate
+    - Indication
+    - Ingredient
+    - IntercurrentEvent
+    - InterventionalStudyDesign
+    - Masking
+    - MedicalDevice
+    - MedicalDeviceIdentifier
+    - NarrativeContent
+    - NarrativeContentItem
+    - Objective
+    - ObservationalStudyDesign
+    - Organization
+    - ParameterMap
+    - PersonName
+    - Procedure
+    - ProductOrganizationRole
+    - Quantity
+    - Range
+    - ReferenceIdentifier
+    - ResponseCode
+    - ScheduleTimeline
+    - ScheduleTimelineExit
+    - ScheduledActivityInstance
+    - ScheduledDecisionInstance
+    - Strength
+    - Study
+    - StudyAmendment
+    - StudyAmendmentImpact
+    - StudyAmendmentReason
+    - StudyArm
+    - StudyCell
+    - StudyChange
+    - StudyCohort
+    - StudyDefinitionDocument
+    - StudyDefinitionDocumentVersion
+    - StudyDesignPopulation
+    - StudyElement
+    - StudyEpoch
+    - StudyIdentifier
+    - StudyIntervention
+    - StudyRole
+    - StudySite
+    - StudyTitle
+    - StudyVersion
+    - SubjectEnrollment
+    - Substance
+    - SyntaxTemplateDictionary
+    - Timing
+    - TransitionRule
+    range: string
+    required: true
+    equals_string: BiomedicalConceptProperty
+
+```
+</details>

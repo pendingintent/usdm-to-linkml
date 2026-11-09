@@ -1,0 +1,80 @@
+
+
+# Slot: organizationId 
+
+
+
+URI: [usdm:slot/organizationId](https://www.cdisc.org/usdm/slot/organizationId)
+Alias: organizationId
+
+<!-- no inheritance hierarchy -->
+
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
+| --- | --- | --- |
+| [AssignedPerson](../classes/AssignedPerson.md) |  |  no  |
+| [ProductOrganizationRole](../classes/ProductOrganizationRole.md) |  |  no  |
+
+
+
+
+
+
+## Properties
+
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [String](../types/String.md) |
+| Domain Of | [AssignedPerson](../classes/AssignedPerson.md), [ProductOrganizationRole](../classes/ProductOrganizationRole.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | usdm:organizationId |
+| native | usdm:organizationId |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: organizationId
+alias: organizationId
+domain_of:
+- AssignedPerson
+- ProductOrganizationRole
+range: string
+
+```
+</details>
