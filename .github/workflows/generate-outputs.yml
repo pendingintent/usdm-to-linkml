@@ -17,12 +17,18 @@ permissions:
 
 jobs:
   generate:
-    # Don't re-run on the bot's own commit (GITHUB_TOKEN pushes don't trigger
-    # workflows anyway; this is a second guard).
-    if: github.actor != 'github-actions[bot]'
+    # The commit-back is pushed with a personal access token, and (unlike
+    # GITHUB_TOKEN pushes) that DOES trigger workflows. Its message contains
+    # [skip ci], which GitHub honours; this condition is a second guard
+    # against a regenerate -> push -> regenerate loop.
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ubuntu-latest
     steps:
+      # main requires pull requests, so the push needs a token that can bypass
+      # that rule (the repository admin's fine-grained PAT; see README).
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GENERATE_PAT }}
 
       - uses: actions/setup-python@v5
         with:

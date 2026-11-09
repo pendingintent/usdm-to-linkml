@@ -28,7 +28,7 @@ python scripts/generate_docs.py   # after step 2
 
 Writes a Mermaid ER diagram to `output/usdm.erdiagram.md` and Markdown docs to `output/docs/`.
 
-**Automatic on merge:** when a change is merged to `main`, the `Generate outputs` GitHub Action regenerates `usdm.yaml`, `usdm.schema.json`, the ER diagram and the docs, and commits any changes back to `main`.
+**Automatic on merge:** when a change is merged to `main`, the `Generate outputs` GitHub Action regenerates `usdm.yaml`, `usdm.schema.json`, the ER diagram and the docs, and commits any changes back to `main`. Because `main` requires pull requests, the push uses a fine-grained personal access token of a repo admin, stored as the repository secret `GENERATE_PAT` (Contents: Read and write on this repo only).
 
 ## Generate other formats
 
