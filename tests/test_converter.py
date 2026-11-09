@@ -1,205 +1,370 @@
-"""Tests for the USDM to LinkML converter."""
+"""Tests for the USDM OpenAPI -> LinkML converter.
 
+``TestSpecConformance`` is the regression suite: it re-derives the expected
+shape of every class straight from ``files/USDM_API_v4.0.0.json`` (independently
+of the converter's own code) and compares it with what LinkML's SchemaView sees
+in both a freshly generated schema and the committed ``output/usdm.yaml``.
+"""
+
+import json
+import re
 import sys
 from pathlib import Path
 
 import pytest
 from linkml_runtime.utils.schemaview import SchemaView
 
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(ROOT / "src"))
 
-from usdm_to_linkml import USDMToLinkMLConverter
+from usdm_to_linkml import USDMToLinkMLConverter  # noqa: E402
+
+SPEC = ROOT / "files" / "USDM_API_v4.0.0.json"
+COMMITTED = ROOT / "output" / "usdm.yaml"
+EXCLUDED = {"HTTPValidationError", "ValidationError"}
+PRIMITIVES = {
+    "string": "string",
+    "integer": "integer",
+    "number": "float",
+    "boolean": "boolean",
+}
 
 
-@pytest.fixture
+def strip(name: str) -> str:
+    return re.sub(r"-(Input|Output)$", "", name)
+
+
+# ---------------------------------------------------------------- expectations
+def _expected_range(node):
+    """-> (range or frozenset of class names, multivalued)"""
+    if "anyOf" in node:
+        options = [o for o in node["anyOf"] if o.get("type") != "null"]
+        if len(options) == 1:
+            node = options[0]
+        else:
+            return frozenset(strip(o["$ref"].split("/")[-1]) for o in options), False
+    if node.get("type") == "array":
+        inner, _ = _expected_range(node["items"])
+        return inner, True
+    if "$ref" in node:
+        return strip(node["$ref"].split("/")[-1]), False
+    if node.get("format") == "date":
+        return "date", False
+    return PRIMITIVES[node["type"]], False
+
+
+def _spec_classes():
+    spec = json.loads(SPEC.read_text())
+    out = {}
+    for name, body in spec["components"]["schemas"].items():
+        cname = strip(name)
+        if cname in EXCLUDED:
+            continue
+        required = set(body.get("required", []))
+        attrs = {}
+        for pname, prop in body["properties"].items():
+            rng, multi = _expected_range(prop)
+            attrs[pname] = (rng, multi, pname in required)
+        out.setdefault(cname, []).append((name, attrs, body))
+    return out
+
+
+SPEC_CLASSES = _spec_classes()
+
+
+@pytest.fixture(scope="module")
 def converter():
-    """Create a converter instance."""
     return USDMToLinkMLConverter()
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def schema(converter):
-    """Get the converted schema."""
     return converter.convert()
 
 
-@pytest.fixture
-def schema_view(converter, tmp_path):
-    """Get a SchemaView of the converted schema."""
+@pytest.fixture(scope="module")
+def fresh_view(converter, tmp_path_factory):
     converter.convert()
-    yaml_path = tmp_path / "usdm.yaml"
-    converter.save(str(yaml_path))
-    return SchemaView(str(yaml_path))
+    path = tmp_path_factory.mktemp("schema") / "usdm.yaml"
+    converter.save(path)
+    return SchemaView(str(path))
 
 
-class TestModelDiscovery:
-    """Test model discovery from usdm_model package."""
-
-    def test_discovers_core_models(self, converter):
-        """Verify core USDM models are discovered."""
-        assert "Study" in converter.models
-        assert "StudyDesign" in converter.models
-        assert "StudyVersion" in converter.models
-        assert "Endpoint" in converter.models
-
-    def test_discovers_base_classes(self, converter):
-        """Verify base API model classes are included."""
-        assert "ApiBaseModel" in converter.models
-        assert "ApiBaseModelWithId" in converter.models
-        assert "ApiBaseModelWithIdNameLabelAndDesc" in converter.models
-
-    def test_discovers_extension_classes(self, converter):
-        """Verify extension classes are included."""
-        assert "ExtensionAttribute" in converter.models
-        assert "ExtensionClass" in converter.models
-
-    def test_discovers_referenced_classes(self, converter):
-        """Verify classes referenced but not in __all__ are included."""
-        assert "MedicalDevice" in converter.models
-        assert "PersonName" in converter.models
-        assert "Substance" in converter.models
+@pytest.fixture(scope="module")
+def committed_view():
+    return SchemaView(str(COMMITTED))
 
 
-class TestSchemaStructure:
-    """Test the generated schema structure."""
-
-    def test_schema_has_required_fields(self, schema):
-        """Verify schema has all required top-level fields."""
-        assert "id" in schema
-        assert "name" in schema
-        assert "prefixes" in schema
-        assert "classes" in schema
-        assert "slots" in schema
-        assert "imports" in schema
-
-    def test_schema_imports_linkml_types(self, schema):
-        """Verify schema imports linkml:types."""
-        assert "linkml:types" in schema["imports"]
-
-    def test_schema_has_classes(self, schema):
-        """Verify schema has classes defined."""
-        assert len(schema["classes"]) > 70  # Should have at least 72 models
-
-    def test_schema_has_slots(self, schema):
-        """Verify schema has slots defined."""
-        assert len(schema["slots"]) > 100
+def _induced(view, cname):
+    return {s.name: s for s in view.class_induced_slots(cname)}
 
 
-class TestInheritance:
-    """Test inheritance mapping."""
-
-    def test_study_inherits_from_api_base_model(self, schema):
-        """Verify Study inherits from ApiBaseModel."""
-        assert schema["classes"]["Study"]["is_a"] == "ApiBaseModel"
-
-    def test_study_design_inherits_correctly(self, schema):
-        """Verify StudyDesign inherits from ApiBaseModelWithIdNameLabelAndDesc."""
-        assert schema["classes"]["StudyDesign"]["is_a"] == "ApiBaseModelWithIdNameLabelAndDesc"
-
-    def test_interventional_study_design_inherits_from_study_design(self, schema):
-        """Verify InterventionalStudyDesign inherits from StudyDesign."""
-        assert schema["classes"]["InterventionalStudyDesign"]["is_a"] == "StudyDesign"
-
-    def test_base_classes_are_abstract(self, schema):
-        """Verify base model classes are marked as abstract."""
-        assert schema["classes"]["ApiBaseModel"].get("abstract") is True
-        assert schema["classes"]["ApiBaseModelWithId"].get("abstract") is True
-
-    def test_inheritance_chain_resolves(self, schema_view):
-        """Verify inheritance chain resolves correctly."""
-        ancestors = schema_view.class_ancestors("InterventionalStudyDesign")
-        assert "StudyDesign" in ancestors
-        assert "ApiBaseModelWithIdNameLabelAndDesc" in ancestors
-        assert "ApiBaseModel" in ancestors
+def _actual_range(slot):
+    if slot.any_of:
+        return frozenset(a.range for a in slot.any_of)
+    return slot.range
 
 
-class TestInstanceType:
-    """Test instanceType handling."""
-
-    def test_instance_type_slot_has_designates_type(self, schema):
-        """Verify instanceType slot has designates_type."""
-        assert schema["slots"]["instanceType"]["designates_type"] is True
-
-    def test_instance_type_slot_no_equals_string(self, schema):
-        """Verify instanceType global slot doesn't have equals_string."""
-        assert "equals_string" not in schema["slots"]["instanceType"]
-
-    def test_classes_have_instance_type_slot_usage(self, schema):
-        """Verify classes have instanceType in slot_usage."""
-        for cls_name in ["Study", "StudyDesign", "Endpoint"]:
-            cls_def = schema["classes"][cls_name]
-            assert "slot_usage" in cls_def
-            assert "instanceType" in cls_def["slot_usage"]
-            assert "equals_string" in cls_def["slot_usage"]["instanceType"]
-
-    def test_instance_type_equals_class_name(self, schema):
-        """Verify instanceType equals_string matches class name."""
-        assert schema["classes"]["Study"]["slot_usage"]["instanceType"]["equals_string"] == "Study"
-        assert schema["classes"]["Endpoint"]["slot_usage"]["instanceType"]["equals_string"] == "Endpoint"
+# ------------------------------------------------------------------ conformance
+@pytest.fixture(params=["fresh_view", "committed_view"])
+def view(request):
+    return request.getfixturevalue(request.param)
 
 
-class TestIdReferences:
-    """Test ID reference slot handling."""
+class TestSpecConformance:
+    def test_spec_input_and_output_variants_are_identical(self):
+        """The converter collapses X-Input/X-Output; guard that assumption."""
+        for cname, variants in SPEC_CLASSES.items():
+            assert all(v[1] == variants[0][1] for v in variants), cname
 
-    def test_id_slots_have_inlined_false(self, schema):
-        """Verify ID reference slots have inlined: false."""
-        assert schema["slots"]["organizationId"]["inlined"] is False
-        assert schema["slots"]["biomedicalConceptIds"]["inlined"] is False
+    def test_class_set_matches_spec(self, view):
+        classes = set(view.all_classes())
+        assert set(SPEC_CLASSES) <= classes
+        # only the linkml:Any helper may be extra
+        assert classes - set(SPEC_CLASSES) <= {"Any"}
 
-    def test_id_slots_infer_range(self, schema):
-        """Verify ID reference slots infer correct range when possible."""
-        assert schema["slots"]["biomedicalConceptIds"]["range"] == "BiomedicalConcept"
-        assert schema["slots"]["organizationId"]["range"] == "Organization"
+    def test_version_matches_spec(self, view):
+        spec = json.loads(SPEC.read_text())
+        assert view.schema.version == spec["info"]["version"]
 
-    def test_list_id_slots_are_multivalued(self, schema):
-        """Verify List[str] ID slots are multivalued."""
-        assert schema["slots"]["biomedicalConceptIds"]["multivalued"] is True
-        assert schema["slots"]["studyInterventionIds"]["multivalued"] is True
+    @pytest.mark.parametrize("cname", sorted(SPEC_CLASSES))
+    def test_class_attributes_match_spec(self, view, cname):
+        expected = SPEC_CLASSES[cname][0][1]
+        actual = _induced(view, cname)
+        assert set(actual) == set(expected), f"{cname} attribute set differs"
+        problems = []
+        for aname, (rng, multi, required) in expected.items():
+            slot = actual[aname]
+            if _actual_range(slot) != rng:
+                problems.append(f"{aname}: range {_actual_range(slot)!r} != {rng!r}")
+            if bool(slot.multivalued) != multi:
+                problems.append(f"{aname}: multivalued {slot.multivalued} != {multi}")
+            if bool(slot.required) != required:
+                problems.append(f"{aname}: required {slot.required} != {required}")
+        assert not problems, f"{cname}: " + "; ".join(problems)
+
+    @pytest.mark.parametrize("cname", sorted(SPEC_CLASSES))
+    def test_instance_type_constant(self, view, cname):
+        body = SPEC_CLASSES[cname][0][2]
+        if "instanceType" not in body["properties"]:
+            pytest.skip(f"{cname} has no instanceType in the spec")
+        const = body["properties"]["instanceType"]["const"]
+        slot = _induced(view, cname)["instanceType"]
+        assert const == cname
+        assert slot.equals_string == const
+        assert slot.designates_type
+
+    def test_non_empty_string_constraint_preserved(self, view):
+        """Every spec ``minLength: 1`` must be a non-empty pattern in LinkML."""
+        checked = 0
+        for cname, variants in SPEC_CLASSES.items():
+            body = variants[0][2]
+            slots = _induced(view, cname)
+            for pname, prop in body["properties"].items():
+                nodes = prop.get("anyOf", [prop])
+                if any(n.get("minLength") == 1 for n in nodes):
+                    assert slots[pname].pattern, f"{cname}.{pname}"
+                    checked += 1
+        assert checked == 133  # unique class attributes (Input/Output pairs collapsed)
+
+    def test_formats_preserved(self, view):
+        assert _induced(view, "GovernanceDate")["dateValue"].range == "date"
+        assert "0-9a-fA-F" in _induced(view, "Study")["id"].pattern
 
 
-class TestTypeMapping:
-    """Test Python type to LinkML range mapping."""
+class TestSpecificRegressions:
+    """Cases that the previous Pydantic-derived schema got wrong."""
 
-    def test_string_fields(self, schema):
-        """Verify string fields map to string range."""
-        assert schema["slots"]["name"]["range"] == "string"
+    @pytest.mark.parametrize(
+        "cname,aname,rng",
+        [
+            ("Procedure", "code", "Code"),
+            ("StudyRole", "code", "Code"),
+            ("BiomedicalConcept", "code", "AliasCode"),
+            ("GeographicScope", "code", "AliasCode"),
+            ("BiomedicalConcept", "properties", "BiomedicalConceptProperty"),
+            ("MedicalDevice", "identifiers", "MedicalDeviceIdentifier"),
+            ("StudyCohort", "characteristics", "Characteristic"),
+            ("StudyDefinitionDocument", "versions", "StudyDefinitionDocumentVersion"),
+            ("ExtensionAttribute", "valueCode", "Code"),
+            ("Quantity", "unit", "AliasCode"),
+            ("Range", "minValue", "Quantity"),
+            ("Timing", "value", "string"),
+        ],
+    )
+    def test_ranges(self, view, cname, aname, rng):
+        assert _induced(view, cname)[aname].range == rng
 
-    def test_list_fields_are_multivalued(self, schema):
-        """Verify List fields are multivalued."""
-        assert schema["slots"]["extensionAttributes"]["multivalued"] is True
+    @pytest.mark.parametrize(
+        "cname,aname,members",
+        [
+            ("Duration", "quantity", {"Quantity", "Range"}),
+            ("Strength", "numerator", {"Quantity", "Range"}),
+            ("StudyVersion", "studyDesigns",
+             {"InterventionalStudyDesign", "ObservationalStudyDesign"}),
+            ("ScheduleTimeline", "instances",
+             {"ScheduledActivityInstance", "ScheduledDecisionInstance"}),
+        ],
+    )
+    def test_unions(self, view, cname, aname, members):
+        assert _actual_range(_induced(view, cname)[aname]) == frozenset(members)
 
-    def test_model_references(self, schema):
-        """Verify model references map to class ranges."""
-        # Note: This depends on the specific field types in the USDM models
-        # The 'country' field should reference Code
-        assert schema["slots"]["country"]["range"] == "Code"
+    def test_required_attributes_preserved(self, view):
+        activity = _induced(view, "Activity")
+        assert {n for n, s in activity.items() if s.required} == {
+            "id", "name", "instanceType"
+        }
+
+    def test_study_has_extension_attributes(self, view):
+        assert "extensionAttributes" in _induced(view, "Study")
 
 
-class TestSchemaValidation:
-    """Test schema validates with LinkML."""
+class TestCommittedOutput:
+    def test_committed_yaml_is_up_to_date(self, converter):
+        """output/usdm.yaml must equal a fresh conversion (run generate_schema.py)."""
+        assert COMMITTED.read_text() == converter.to_yaml()
 
-    def test_schema_loads_with_schema_view(self, schema_view):
-        """Verify schema loads without errors."""
-        # If we got here, the schema loaded successfully
-        assert schema_view is not None
 
-    def test_all_classes_resolve(self, schema_view):
-        """Verify all class references resolve."""
-        for cls_name, cls_def in schema_view.all_classes().items():
-            if cls_def.is_a:
-                parent = schema_view.get_class(cls_def.is_a)
-                assert parent is not None, f"Parent {cls_def.is_a} not found for {cls_name}"
+class TestSchemaValidity:
+    def test_all_slot_ranges_resolve(self, fresh_view):
+        known = set(fresh_view.all_classes()) | set(fresh_view.all_types())
+        for cname in fresh_view.all_classes():
+            for slot in fresh_view.class_induced_slots(cname):
+                assert slot.range in known, f"{cname}.{slot.name}: {slot.range}"
+                for alt in slot.any_of or []:
+                    assert alt.range in known
 
-    def test_all_slot_ranges_resolve(self, schema_view):
-        """Verify all slot ranges resolve to valid types or classes."""
-        # Get all valid ranges (built-in types + classes)
-        builtin_types = {"string", "integer", "float", "boolean", "date", "datetime", "uri", "uriorcurie"}
-        classes = set(schema_view.all_classes().keys())
-        valid_ranges = builtin_types | classes
+    def test_generates_json_schema(self, tmp_path):
+        from linkml.generators.jsonschemagen import JsonSchemaGenerator
 
-        for slot_name, slot_def in schema_view.all_slots().items():
-            if slot_def.range and slot_def.range not in valid_ranges:
-                # Check if it's an any_of pattern
-                if not slot_def.any_of:
-                    pytest.fail(f"Slot {slot_name} has invalid range: {slot_def.range}")
+        out = json.loads(JsonSchemaGenerator(str(COMMITTED)).serialize())
+        assert "Study" in out["$defs"]
+        assert set(out["$defs"]["Activity"]["required"]) >= {"id", "name", "instanceType"}
+
+
+# ----------------------------------------------------- real-world example data
+EXAMPLES = sorted((ROOT / "examples").glob("*.json"))
+JSON_SCHEMA = ROOT / "output" / "usdm.schema.json"
+
+
+def _ids(paths):
+    return [p.stem for p in paths]
+
+
+@pytest.fixture(scope="module")
+def generated_validator():
+    from jsonschema import Draft202012Validator
+
+    defs = json.loads(JSON_SCHEMA.read_text())["$defs"]
+    return Draft202012Validator({"$ref": "#/$defs/Wrapper", "$defs": defs})
+
+
+@pytest.fixture(scope="module")
+def openapi_validator():
+    """Baseline: the original OpenAPI schema itself."""
+    from jsonschema import Draft202012Validator
+
+    spec = json.loads(SPEC.read_text())
+    return Draft202012Validator(
+        {"$ref": "#/components/schemas/Wrapper-Input", "components": spec["components"]}
+    )
+
+
+class TestJsonSchema:
+    def test_json_schema_is_up_to_date(self):
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location(
+            "generate_schema", ROOT / "scripts" / "generate_schema.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        assert JSON_SCHEMA.read_text() == module.generate_json_schema(COMMITTED)
+
+    def test_no_dangling_refs(self):
+        text = JSON_SCHEMA.read_text()
+        defs = set(json.loads(text)["$defs"])
+        refs = set(re.findall(r'"\$ref": "#/\$defs/([^"]+)"', text))
+        assert refs <= defs, f"dangling refs: {refs - defs}"
+
+    def test_union_members_are_objects_not_strings(self):
+        defs = json.loads(JSON_SCHEMA.read_text())["$defs"]
+        quantity = defs["Duration"]["properties"]["quantity"]
+        assert {"$ref": "#/$defs/Quantity"} in quantity["anyOf"]
+        assert {"$ref": "#/$defs/Range"} in quantity["anyOf"]
+
+
+@pytest.mark.skipif(not EXAMPLES, reason="no example files in examples/")
+class TestExampleFiles:
+    @pytest.mark.parametrize("path", EXAMPLES, ids=_ids(EXAMPLES))
+    def test_example_is_valid_against_openapi_baseline(self, path, openapi_validator):
+        """Sanity check: the example itself conforms to the source spec."""
+        errors = list(openapi_validator.iter_errors(json.loads(path.read_text())))
+        assert not errors, errors[0].message
+
+    @pytest.mark.parametrize("path", EXAMPLES, ids=_ids(EXAMPLES))
+    def test_example_is_valid_against_generated_json_schema(
+        self, path, generated_validator
+    ):
+        errors = list(generated_validator.iter_errors(json.loads(path.read_text())))
+        assert not errors, errors[0].message
+
+    @pytest.mark.parametrize("path", EXAMPLES, ids=_ids(EXAMPLES))
+    def test_example_is_valid_with_linkml_validator(self, path):
+        """LinkML's own validator accepts the example against the YAML schema."""
+        from linkml.validator import validate
+
+        report = validate(json.loads(path.read_text()), str(COMMITTED), "Wrapper")
+        assert not report.results, report.results[0].message
+
+
+def _walk(obj):
+    if isinstance(obj, dict):
+        yield obj
+        for v in obj.values():
+            yield from _walk(v)
+    elif isinstance(obj, list):
+        for v in obj:
+            yield from _walk(v)
+
+
+def _first(doc, instance_type):
+    return next(o for o in _walk(doc) if o.get("instanceType") == instance_type)
+
+
+@pytest.mark.skipif(not EXAMPLES, reason="no example files in examples/")
+class TestSchemaRejectsInvalidData:
+    """Guard against a schema that accepts everything."""
+
+    @pytest.fixture(scope="class")
+    def doc(self):
+        pilot = [p for p in EXAMPLES if "CDISC" in p.name] or EXAMPLES
+        return json.loads(pilot[0].read_text())
+
+    @pytest.mark.parametrize(
+        "name,mutate",
+        [
+            ("missing required name", lambda d: _first(d, "Activity").pop("name")),
+            ("empty required name", lambda d: _first(d, "Activity").update(name="")),
+            ("wrong instanceType", lambda d: _first(d, "Activity").update(instanceType="Arm")),
+            ("unknown attribute", lambda d: _first(d, "Activity").update(bogus=1)),
+            ("number for string (Timing.value)", lambda d: _first(d, "Timing").update(value=5)),
+            ("string for Code (StudyRole.code)", lambda d: _first(d, "StudyRole").update(code="x")),
+            (
+                "wrong class in union list",
+                lambda d: _first(d, "StudyVersion")["studyDesigns"].__setitem__(
+                    0, {"id": "x", "name": "y", "instanceType": "Activity"}
+                ),
+            ),
+            (
+                "string in union list",
+                lambda d: _first(d, "StudyVersion")["studyDesigns"].__setitem__(0, "sd1"),
+            ),
+        ],
+    )
+    def test_rejects(self, doc, generated_validator, name, mutate):
+        import copy
+
+        bad = copy.deepcopy(doc)
+        mutate(bad)
+        assert list(generated_validator.iter_errors(bad)), f"accepted: {name}"

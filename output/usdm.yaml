@@ -1,6 +1,7 @@
 id: https://www.cdisc.org/usdm
 name: usdm
 title: Unified Study Definitions Model
+description: A simple TransCelerate Digital Data Flow (DDF) Study Definitions Repository API.
 version: 4.0.0
 prefixes:
   usdm: https://www.cdisc.org/usdm/
@@ -10,1910 +11,3683 @@ default_range: string
 imports:
 - linkml:types
 classes:
+  Any:
+    class_uri: linkml:Any
+    description: Unconstrained range of union-typed attributes; their any_of narrows it to the allowed classes.
   Abbreviation:
-    is_a: ApiBaseModelWithId
-    slots:
-    - abbreviatedText
-    - expandedText
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      abbreviatedText:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      expandedText:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Abbreviation
+        designates_type: true
+        required: true
   Activity:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - previousId
-    - nextId
-    - childIds
-    - definedProcedures
-    - biomedicalConceptIds
-    - bcCategoryIds
-    - bcSurrogateIds
-    - timelineId
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      previousId:
+        range: string
+        required: false
+      nextId:
+        range: string
+        required: false
+      childIds:
+        range: string
+        multivalued: true
+        required: false
+      definedProcedures:
+        range: Procedure
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      biomedicalConceptIds:
+        range: string
+        multivalued: true
+        required: false
+      bcCategoryIds:
+        range: string
+        multivalued: true
+        required: false
+      bcSurrogateIds:
+        range: string
+        multivalued: true
+        required: false
+      timelineId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Activity
+        designates_type: true
+        required: true
   Address:
-    is_a: ApiBaseModelWithId
-    slots:
-    - text
-    - lines
-    - city
-    - district
-    - state
-    - postalCode
-    - country
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      text:
+        range: string
+        required: false
+      lines:
+        range: string
+        multivalued: true
+        required: false
+      city:
+        range: string
+        required: false
+      district:
+        range: string
+        required: false
+      state:
+        range: string
+        required: false
+      postalCode:
+        range: string
+        required: false
+      country:
+        range: Code
+        inlined: true
+        required: false
       instanceType:
+        range: string
         equals_string: Address
+        designates_type: true
+        required: true
   AdministrableProduct:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - pharmacologicClass
-    - administrableDoseForm
-    - productDesignation
-    - sourcing
-    - properties
-    - identifiers
-    - ingredients
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      pharmacologicClass:
+        range: Code
+        inlined: true
+        required: false
+      administrableDoseForm:
+        range: AliasCode
+        inlined: true
+        required: true
+      productDesignation:
+        range: Code
+        inlined: true
+        required: true
+      sourcing:
+        range: Code
+        inlined: true
+        required: false
+      properties:
+        range: AdministrableProductProperty
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      identifiers:
+        range: AdministrableProductIdentifier
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      ingredients:
+        range: Ingredient
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: AdministrableProduct
+        designates_type: true
+        required: true
   AdministrableProductIdentifier:
-    slots:
-    - id
-    - extensionAttributes
-    - text
-    - scopeId
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      text:
+        range: string
+        required: true
+      scopeId:
+        range: string
+        required: true
       instanceType:
+        range: string
         equals_string: AdministrableProductIdentifier
+        designates_type: true
+        required: true
   AdministrableProductProperty:
-    is_a: ApiBaseModelWithIdAndName
-    slots:
-    - text
-    - type
-    - quantity
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      text:
+        range: string
+        required: true
+      type:
+        range: Code
+        inlined: true
+        required: true
+      quantity:
+        range: Quantity
+        inlined: true
+        required: false
       instanceType:
+        range: string
         equals_string: AdministrableProductProperty
+        designates_type: true
+        required: true
   Administration:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - duration
-    - dose
-    - route
-    - frequency
-    - administrableProductId
-    - medicalDeviceId
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      duration:
+        range: Duration
+        inlined: true
+        required: true
+      dose:
+        range: Quantity
+        inlined: true
+        required: false
+      route:
+        range: AliasCode
+        inlined: true
+        required: false
+      frequency:
+        range: AliasCode
+        inlined: true
+        required: false
+      administrableProductId:
+        range: string
+        required: false
+      medicalDeviceId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Administration
+        designates_type: true
+        required: true
   AliasCode:
-    is_a: ApiBaseModelWithId
-    slots:
-    - standardCode
-    - standardCodeAliases
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      standardCode:
+        range: Code
+        inlined: true
+        required: true
+      standardCodeAliases:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: AliasCode
+        designates_type: true
+        required: true
   AnalysisPopulation:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - text
-    - subsetOfIds
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      text:
+        range: string
+        required: true
+      subsetOfIds:
+        range: string
+        multivalued: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: AnalysisPopulation
-  ApiBaseModel:
-    abstract: true
-  ApiBaseModelWithId:
-    is_a: ApiBaseModelWithIdOnly
-    abstract: true
-    slots:
-    - extensionAttributes
-  ApiBaseModelWithIdAndDesc:
-    is_a: ApiBaseModelWithId
-    abstract: true
-    slots:
-    - description
-  ApiBaseModelWithIdAndName:
-    is_a: ApiBaseModelWithId
-    abstract: true
-    slots:
-    - name
-  ApiBaseModelWithIdNameAndDesc:
-    is_a: ApiBaseModelWithIdAndName
-    abstract: true
-    slots:
-    - description
-  ApiBaseModelWithIdNameAndLabel:
-    is_a: ApiBaseModelWithIdAndName
-    abstract: true
-    slots:
-    - label
-  ApiBaseModelWithIdNameLabelAndDesc:
-    is_a: ApiBaseModelWithIdNameAndLabel
-    abstract: true
-    slots:
-    - description
-  ApiBaseModelWithIdOnly:
-    is_a: ApiBaseModel
-    abstract: true
-    slots:
-    - id
+        designates_type: true
+        required: true
   AssignedPerson:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - personName
-    - jobTitle
-    - organizationId
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      personName:
+        range: PersonName
+        inlined: true
+        required: true
+      jobTitle:
+        range: string
+        required: true
+      organizationId:
+        range: string
+        required: false
       instanceType:
+        range: string
         equals_string: AssignedPerson
-  BaseAliasCode:
-    slots:
-    - id
-    - standardCode
-    - standardCodeAliases
-    - instanceType
-    - extensionAttributes
-    slot_usage:
-      instanceType:
-        equals_string: AliasCode
-  BaseCode:
-    slots:
-    - id
-    - code
-    - codeSystem
-    - codeSystemVersion
-    - decode
-    - instanceType
-    - extensionAttributes
-    slot_usage:
-      instanceType:
-        equals_string: Code
-  BaseQuantity:
-    slots:
-    - id
-    - value
-    - unit
-    - instanceType
-    - extensionAttributes
-    slot_usage:
-      instanceType:
-        equals_string: Quantity
-  BaseRange:
-    slots:
-    - id
-    - minValue
-    - maxValue
-    - isApproximate
-    - instanceType
-    - extensionAttributes
-    slot_usage:
-      instanceType:
-        equals_string: Range
+        designates_type: true
+        required: true
   BiomedicalConcept:
-    is_a: ApiBaseModelWithIdNameAndLabel
-    slots:
-    - synonyms
-    - reference
-    - properties
-    - code
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      synonyms:
+        range: string
+        multivalued: true
+        required: false
+      reference:
+        range: string
+        required: true
+      properties:
+        range: BiomedicalConceptProperty
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      code:
+        range: AliasCode
+        inlined: true
+        required: true
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: BiomedicalConcept
+        designates_type: true
+        required: true
   BiomedicalConceptCategory:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - childIds
-    - memberIds
-    - code
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      childIds:
+        range: string
+        multivalued: true
+        required: false
+      memberIds:
+        range: string
+        multivalued: true
+        required: false
+      code:
+        range: AliasCode
+        inlined: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: BiomedicalConceptCategory
+        designates_type: true
+        required: true
   BiomedicalConceptProperty:
-    is_a: ApiBaseModelWithIdNameAndLabel
-    slots:
-    - isRequired
-    - isEnabled
-    - datatype
-    - responseCodes
-    - code
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      isRequired:
+        range: boolean
+        required: true
+      isEnabled:
+        range: boolean
+        required: true
+      datatype:
+        range: string
+        required: true
+      responseCodes:
+        range: ResponseCode
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      code:
+        range: AliasCode
+        inlined: true
+        required: true
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: BiomedicalConceptProperty
+        designates_type: true
+        required: true
   BiomedicalConceptSurrogate:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - reference
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      reference:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: BiomedicalConceptSurrogate
+        designates_type: true
+        required: true
   BiospecimenRetention:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - isRetained
-    - includesDNA
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      isRetained:
+        range: boolean
+        required: true
+      includesDNA:
+        range: boolean
+        required: false
       instanceType:
+        range: string
         equals_string: BiospecimenRetention
+        designates_type: true
+        required: true
   Characteristic:
-    is_a: SyntaxTemplate
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      text:
+        range: string
+        required: true
+      dictionaryId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Characteristic
+        designates_type: true
+        required: true
   Code:
-    is_a: ApiBaseModelWithId
-    slots:
-    - code
-    - codeSystem
-    - codeSystemVersion
-    - decode
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      code:
+        range: string
+        required: true
+      codeSystem:
+        range: string
+        required: true
+      codeSystemVersion:
+        range: string
+        required: true
+      decode:
+        range: string
+        required: true
       instanceType:
+        range: string
         equals_string: Code
+        designates_type: true
+        required: true
   CommentAnnotation:
-    is_a: ApiBaseModelWithId
-    slots:
-    - text
-    - codes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      text:
+        range: string
+        required: true
+      codes:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: CommentAnnotation
+        designates_type: true
+        required: true
   Condition:
-    is_a: SyntaxTemplate
-    slots:
-    - contextIds
-    - appliesToIds
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      text:
+        range: string
+        required: true
+      dictionaryId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      contextIds:
+        range: string
+        multivalued: true
+        required: false
+      appliesToIds:
+        range: string
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Condition
+        designates_type: true
+        required: true
   ConditionAssignment:
-    is_a: ApiBaseModelWithId
-    slots:
-    - condition
-    - conditionTargetId
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      condition:
+        range: string
+        required: true
+      conditionTargetId:
+        range: string
+        required: true
       instanceType:
+        range: string
         equals_string: ConditionAssignment
+        designates_type: true
+        required: true
   DocumentContentReference:
-    is_a: ApiBaseModelWithId
-    slots:
-    - sectionNumber
-    - sectionTitle
-    - appliesToId
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      sectionNumber:
+        range: string
+        required: true
+      sectionTitle:
+        range: string
+        required: true
+      appliesToId:
+        range: string
+        required: true
       instanceType:
+        range: string
         equals_string: DocumentContentReference
+        designates_type: true
+        required: true
   Duration:
-    is_a: ApiBaseModelWithId
-    slots:
-    - text
-    - quantity
-    - durationWillVary
-    - reasonDurationWillVary
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      text:
+        range: string
+        required: false
+      quantity:
+        range: Any
+        any_of:
+        - range: Quantity
+          inlined: true
+        - range: Range
+          inlined: true
+        inlined: true
+        required: false
+      durationWillVary:
+        range: boolean
+        required: true
+      reasonDurationWillVary:
+        range: string
+        required: false
       instanceType:
+        range: string
         equals_string: Duration
+        designates_type: true
+        required: true
   EligibilityCriterion:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - category
-    - identifier
-    - criterionItemId
-    - nextId
-    - previousId
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      category:
+        range: Code
+        inlined: true
+        required: true
+      identifier:
+        range: string
+        required: true
+      criterionItemId:
+        range: string
+        required: true
+      nextId:
+        range: string
+        required: false
+      previousId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: EligibilityCriterion
+        designates_type: true
+        required: true
   EligibilityCriterionItem:
-    is_a: SyntaxTemplate
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      text:
+        range: string
+        required: true
+      dictionaryId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: EligibilityCriterionItem
+        designates_type: true
+        required: true
   Encounter:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - type
-    - previousId
-    - nextId
-    - scheduledAtId
-    - environmentalSettings
-    - contactModes
-    - transitionStartRule
-    - transitionEndRule
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      type:
+        range: Code
+        inlined: true
+        required: true
+      previousId:
+        range: string
+        required: false
+      nextId:
+        range: string
+        required: false
+      scheduledAtId:
+        range: string
+        required: false
+      environmentalSettings:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      contactModes:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      transitionStartRule:
+        range: TransitionRule
+        inlined: true
+        required: false
+      transitionEndRule:
+        range: TransitionRule
+        inlined: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Encounter
+        designates_type: true
+        required: true
   Endpoint:
-    is_a: SyntaxTemplate
-    slots:
-    - purpose
-    - level
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      text:
+        range: string
+        required: true
+      dictionaryId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      purpose:
+        range: string
+        required: true
+      level:
+        range: Code
+        inlined: true
+        required: true
       instanceType:
+        range: string
         equals_string: Endpoint
+        designates_type: true
+        required: true
   Estimand:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - populationSummary
-    - analysisPopulationId
-    - interventionIds
-    - variableOfInterestId
-    - intercurrentEvents
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      populationSummary:
+        range: string
+        required: true
+      analysisPopulationId:
+        range: string
+        required: true
+      interventionIds:
+        range: string
+        multivalued: true
+        required: true
+      variableOfInterestId:
+        range: string
+        required: true
+      intercurrentEvents:
+        range: IntercurrentEvent
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Estimand
-  Extension:
-    abstract: true
-    slots:
-    - id
-    - url
+        designates_type: true
+        required: true
   ExtensionAttribute:
-    is_a: Extension
-    slots:
-    - valueString
-    - valueBoolean
-    - valueInteger
-    - valueId
-    - valueQuantity
-    - valueRange
-    - valueCode
-    - valueAliasCode
-    - valueExtensionClass
-    - extensionAttributes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      url:
+        range: string
+        required: true
+      valueString:
+        range: string
+        required: false
+      valueBoolean:
+        range: boolean
+        required: false
+      valueInteger:
+        range: integer
+        required: false
+      valueId:
+        range: string
+        required: false
+      valueQuantity:
+        range: Quantity
+        inlined: true
+        required: false
+      valueRange:
+        range: Range
+        inlined: true
+        required: false
+      valueCode:
+        range: Code
+        inlined: true
+        required: false
+      valueAliasCode:
+        range: AliasCode
+        inlined: true
+        required: false
+      valueExtensionClass:
+        range: ExtensionClass
+        inlined: true
+        required: false
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: ExtensionAttribute
+        designates_type: true
+        required: true
   ExtensionClass:
-    is_a: Extension
-    slots:
-    - extensionAttributes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      url:
+        range: string
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
       instanceType:
+        range: string
         equals_string: ExtensionClass
+        designates_type: true
+        required: true
   GeographicScope:
-    is_a: ApiBaseModelWithId
-    slots:
-    - type
-    - code
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      type:
+        range: Code
+        inlined: true
+        required: true
+      code:
+        range: AliasCode
+        inlined: true
+        required: false
       instanceType:
+        range: string
         equals_string: GeographicScope
+        designates_type: true
+        required: true
   GovernanceDate:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - type
-    - dateValue
-    - geographicScopes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      type:
+        range: Code
+        inlined: true
+        required: true
+      dateValue:
+        range: date
+        required: true
+      geographicScopes:
+        range: GeographicScope
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
       instanceType:
+        range: string
         equals_string: GovernanceDate
+        designates_type: true
+        required: true
   Indication:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - codes
-    - isRareDisease
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      codes:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      isRareDisease:
+        range: boolean
+        required: true
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Indication
+        designates_type: true
+        required: true
   Ingredient:
-    is_a: ApiBaseModelWithId
-    slots:
-    - role
-    - substance
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      role:
+        range: Code
+        inlined: true
+        required: true
+      substance:
+        range: Substance
+        inlined: true
+        required: true
       instanceType:
+        range: string
         equals_string: Ingredient
+        designates_type: true
+        required: true
   IntercurrentEvent:
-    is_a: SyntaxTemplate
-    slots:
-    - strategy
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      text:
+        range: string
+        required: true
+      dictionaryId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      strategy:
+        range: string
+        required: true
       instanceType:
+        range: string
         equals_string: IntercurrentEvent
+        designates_type: true
+        required: true
   InterventionalStudyDesign:
-    is_a: StudyDesign
-    slots:
-    - subTypes
-    - model
-    - intentTypes
-    - blindingSchema
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      studyType:
+        range: Code
+        inlined: true
+        required: false
+      studyPhase:
+        range: AliasCode
+        inlined: true
+        required: false
+      therapeuticAreas:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      characteristics:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      encounters:
+        range: Encounter
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      activities:
+        range: Activity
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      arms:
+        range: StudyArm
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      studyCells:
+        range: StudyCell
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      rationale:
+        range: string
+        required: true
+      epochs:
+        range: StudyEpoch
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      elements:
+        range: StudyElement
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      estimands:
+        range: Estimand
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      indications:
+        range: Indication
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      studyInterventionIds:
+        range: string
+        multivalued: true
+        required: false
+      objectives:
+        range: Objective
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      population:
+        range: StudyDesignPopulation
+        inlined: true
+        required: true
+      scheduleTimelines:
+        range: ScheduleTimeline
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      biospecimenRetentions:
+        range: BiospecimenRetention
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      documentVersionIds:
+        range: string
+        multivalued: true
+        required: false
+      eligibilityCriteria:
+        range: EligibilityCriterion
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      analysisPopulations:
+        range: AnalysisPopulation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      subTypes:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      model:
+        range: Code
+        inlined: true
+        required: true
+      intentTypes:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      blindingSchema:
+        range: AliasCode
+        inlined: true
+        required: false
       instanceType:
+        range: string
         equals_string: InterventionalStudyDesign
+        designates_type: true
+        required: true
   Masking:
-    is_a: ApiBaseModelWithId
-    slots:
-    - text
-    - isMasked
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      text:
+        range: string
+        required: true
+      isMasked:
+        range: boolean
+        required: true
       instanceType:
+        range: string
         equals_string: Masking
+        designates_type: true
+        required: true
   MedicalDevice:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - hardwareVersion
-    - softwareVersion
-    - embeddedProductId
-    - sourcing
-    - identifiers
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      hardwareVersion:
+        range: string
+        required: false
+      softwareVersion:
+        range: string
+        required: false
+      embeddedProductId:
+        range: string
+        required: false
+      sourcing:
+        range: Code
+        inlined: true
+        required: false
+      identifiers:
+        range: MedicalDeviceIdentifier
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: MedicalDevice
+        designates_type: true
+        required: true
   MedicalDeviceIdentifier:
-    slots:
-    - id
-    - extensionAttributes
-    - text
-    - scopeId
-    - instanceType
-    - type
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      text:
+        range: string
+        required: true
+      scopeId:
+        range: string
+        required: true
+      type:
+        range: Code
+        inlined: true
+        required: true
       instanceType:
+        range: string
         equals_string: MedicalDeviceIdentifier
+        designates_type: true
+        required: true
   NarrativeContent:
-    is_a: ApiBaseModelWithIdAndName
-    slots:
-    - sectionNumber
-    - sectionTitle
-    - displaySectionNumber
-    - displaySectionTitle
-    - childIds
-    - previousId
-    - nextId
-    - contentItemId
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      sectionNumber:
+        range: string
+        required: false
+      sectionTitle:
+        range: string
+        required: false
+      displaySectionNumber:
+        range: boolean
+        required: true
+      displaySectionTitle:
+        range: boolean
+        required: true
+      childIds:
+        range: string
+        multivalued: true
+        required: false
+      previousId:
+        range: string
+        required: false
+      nextId:
+        range: string
+        required: false
+      contentItemId:
+        range: string
+        required: false
       instanceType:
+        range: string
         equals_string: NarrativeContent
+        designates_type: true
+        required: true
   NarrativeContentItem:
-    is_a: ApiBaseModelWithIdAndName
-    slots:
-    - text
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      text:
+        range: string
+        required: true
       instanceType:
+        range: string
         equals_string: NarrativeContentItem
+        designates_type: true
+        required: true
   Objective:
-    is_a: SyntaxTemplate
-    slots:
-    - level
-    - endpoints
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      text:
+        range: string
+        required: true
+      dictionaryId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      level:
+        range: Code
+        inlined: true
+        required: true
+      endpoints:
+        range: Endpoint
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Objective
+        designates_type: true
+        required: true
   ObservationalStudyDesign:
-    is_a: StudyDesign
-    slots:
-    - subTypes
-    - model
-    - timePerspective
-    - samplingMethod
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      studyType:
+        range: Code
+        inlined: true
+        required: false
+      studyPhase:
+        range: AliasCode
+        inlined: true
+        required: false
+      therapeuticAreas:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      characteristics:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      encounters:
+        range: Encounter
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      activities:
+        range: Activity
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      arms:
+        range: StudyArm
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      studyCells:
+        range: StudyCell
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      rationale:
+        range: string
+        required: true
+      epochs:
+        range: StudyEpoch
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      elements:
+        range: StudyElement
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      estimands:
+        range: Estimand
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      indications:
+        range: Indication
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      studyInterventionIds:
+        range: string
+        multivalued: true
+        required: false
+      objectives:
+        range: Objective
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      population:
+        range: StudyDesignPopulation
+        inlined: true
+        required: true
+      scheduleTimelines:
+        range: ScheduleTimeline
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      biospecimenRetentions:
+        range: BiospecimenRetention
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      documentVersionIds:
+        range: string
+        multivalued: true
+        required: false
+      eligibilityCriteria:
+        range: EligibilityCriterion
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      analysisPopulations:
+        range: AnalysisPopulation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      subTypes:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      model:
+        range: Code
+        inlined: true
+        required: true
+      timePerspective:
+        range: Code
+        inlined: true
+        required: true
+      samplingMethod:
+        range: Code
+        inlined: true
+        required: false
       instanceType:
+        range: string
         equals_string: ObservationalStudyDesign
+        designates_type: true
+        required: true
   Organization:
-    is_a: ApiBaseModelWithIdNameAndLabel
-    slots:
-    - type
-    - identifierScheme
-    - identifier
-    - legalAddress
-    - managedSites
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      type:
+        range: Code
+        inlined: true
+        required: true
+      identifierScheme:
+        range: string
+        required: true
+      identifier:
+        range: string
+        required: true
+      legalAddress:
+        range: Address
+        inlined: true
+        required: false
+      managedSites:
+        range: StudySite
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Organization
+        designates_type: true
+        required: true
   ParameterMap:
-    is_a: ApiBaseModelWithId
-    slots:
-    - tag
-    - reference
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      tag:
+        range: string
+        required: true
+      reference:
+        range: string
+        required: true
       instanceType:
+        range: string
         equals_string: ParameterMap
+        designates_type: true
+        required: true
   PersonName:
-    is_a: ApiBaseModelWithId
-    slots:
-    - text
-    - familyName
-    - givenNames
-    - prefixes
-    - suffixes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      text:
+        range: string
+        required: false
+      familyName:
+        range: string
+        required: false
+      givenNames:
+        range: string
+        multivalued: true
+        required: false
+      prefixes:
+        range: string
+        multivalued: true
+        required: false
+      suffixes:
+        range: string
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: PersonName
+        designates_type: true
+        required: true
   Procedure:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - procedureType
-    - code
-    - studyInterventionId
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      procedureType:
+        range: string
+        required: true
+      code:
+        range: Code
+        inlined: true
+        required: true
+      studyInterventionId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Procedure
+        designates_type: true
+        required: true
   ProductOrganizationRole:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - code
-    - appliesToIds
-    - organizationId
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      code:
+        range: Code
+        inlined: true
+        required: true
+      appliesToIds:
+        range: string
+        multivalued: true
+        required: false
+      organizationId:
+        range: string
+        required: true
       instanceType:
+        range: string
         equals_string: ProductOrganizationRole
+        designates_type: true
+        required: true
   Quantity:
-    slots:
-    - id
-    - extensionAttributes
-    - value
-    - unit
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      value:
+        range: float
+        required: true
+      unit:
+        range: AliasCode
+        inlined: true
+        required: false
       instanceType:
+        range: string
         equals_string: Quantity
+        designates_type: true
+        required: true
   Range:
-    slots:
-    - id
-    - extensionAttributes
-    - minValue
-    - maxValue
-    - isApproximate
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      minValue:
+        range: Quantity
+        inlined: true
+        required: true
+      maxValue:
+        range: Quantity
+        inlined: true
+        required: true
+      isApproximate:
+        range: boolean
+        required: true
       instanceType:
+        range: string
         equals_string: Range
+        designates_type: true
+        required: true
   ReferenceIdentifier:
-    slots:
-    - id
-    - extensionAttributes
-    - text
-    - scopeId
-    - instanceType
-    - type
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      text:
+        range: string
+        required: true
+      scopeId:
+        range: string
+        required: true
+      type:
+        range: Code
+        inlined: true
+        required: true
       instanceType:
+        range: string
         equals_string: ReferenceIdentifier
+        designates_type: true
+        required: true
   ResponseCode:
-    is_a: ApiBaseModelWithIdNameAndLabel
-    slots:
-    - isEnabled
-    - code
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      isEnabled:
+        range: boolean
+        required: true
+      code:
+        range: Code
+        inlined: true
+        required: true
       instanceType:
+        range: string
         equals_string: ResponseCode
+        designates_type: true
+        required: true
   ScheduleTimeline:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - mainTimeline
-    - entryCondition
-    - entryId
-    - exits
-    - timings
-    - instances
-    - plannedDuration
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      mainTimeline:
+        range: boolean
+        required: true
+      entryCondition:
+        range: string
+        required: true
+      entryId:
+        range: string
+        required: true
+      exits:
+        range: ScheduleTimelineExit
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      timings:
+        range: Timing
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      instances:
+        range: Any
+        any_of:
+        - range: ScheduledActivityInstance
+          inlined: true
+        - range: ScheduledDecisionInstance
+          inlined: true
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      plannedDuration:
+        range: Duration
+        inlined: true
+        required: false
       instanceType:
+        range: string
         equals_string: ScheduleTimeline
+        designates_type: true
+        required: true
   ScheduleTimelineExit:
-    is_a: ApiBaseModelWithId
-    slots:
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: ScheduleTimelineExit
+        designates_type: true
+        required: true
   ScheduledActivityInstance:
-    is_a: ScheduledInstance
-    slots:
-    - timelineId
-    - timelineExitId
-    - activityIds
-    - encounterId
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      defaultConditionId:
+        range: string
+        required: false
+      epochId:
+        range: string
+        required: false
+      timelineId:
+        range: string
+        required: false
+      timelineExitId:
+        range: string
+        required: false
+      activityIds:
+        range: string
+        multivalued: true
+        required: false
+      encounterId:
+        range: string
+        required: false
       instanceType:
+        range: string
         equals_string: ScheduledActivityInstance
+        designates_type: true
+        required: true
   ScheduledDecisionInstance:
-    is_a: ScheduledInstance
-    slots:
-    - conditionAssignments
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      defaultConditionId:
+        range: string
+        required: false
+      epochId:
+        range: string
+        required: false
+      conditionAssignments:
+        range: ConditionAssignment
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
       instanceType:
+        range: string
         equals_string: ScheduledDecisionInstance
-  ScheduledInstance:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    abstract: true
-    slots:
-    - defaultConditionId
-    - epochId
-    - instanceType
-    slot_usage:
-      instanceType:
-        equals_string: ScheduledInstance
+        designates_type: true
+        required: true
   Strength:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - numerator
-    - denominator
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      numerator:
+        range: Any
+        any_of:
+        - range: Quantity
+          inlined: true
+        - range: Range
+          inlined: true
+        inlined: true
+        required: true
+      denominator:
+        range: Quantity
+        inlined: true
+        required: false
       instanceType:
+        range: string
         equals_string: Strength
+        designates_type: true
+        required: true
   Study:
-    is_a: ApiBaseModel
-    slots:
-    - id
-    - name
-    - description
-    - label
-    - versions
-    - documentedBy
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        required: false
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      description:
+        range: string
+        required: false
+      label:
+        range: string
+        required: false
+      versions:
+        range: StudyVersion
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      documentedBy:
+        range: StudyDefinitionDocument
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: Study
+        designates_type: true
+        required: true
   StudyAmendment:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - number
-    - summary
-    - primaryReason
-    - secondaryReasons
-    - changes
-    - impacts
-    - geographicScopes
-    - enrollments
-    - dateValues
-    - previousId
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      number:
+        range: string
+        required: true
+      summary:
+        range: string
+        required: true
+      primaryReason:
+        range: StudyAmendmentReason
+        inlined: true
+        required: true
+      secondaryReasons:
+        range: StudyAmendmentReason
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      changes:
+        range: StudyChange
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      impacts:
+        range: StudyAmendmentImpact
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      geographicScopes:
+        range: GeographicScope
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      enrollments:
+        range: SubjectEnrollment
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      dateValues:
+        range: GovernanceDate
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      previousId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyAmendment
+        designates_type: true
+        required: true
   StudyAmendmentImpact:
-    is_a: ApiBaseModelWithId
-    slots:
-    - type
-    - text
-    - isSubstantial
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      type:
+        range: Code
+        inlined: true
+        required: true
+      text:
+        range: string
+        required: true
+      isSubstantial:
+        range: boolean
+        required: true
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyAmendmentImpact
+        designates_type: true
+        required: true
   StudyAmendmentReason:
-    is_a: ApiBaseModelWithId
-    slots:
-    - code
-    - otherReason
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      code:
+        range: Code
+        inlined: true
+        required: true
+      otherReason:
+        range: string
+        required: false
       instanceType:
+        range: string
         equals_string: StudyAmendmentReason
+        designates_type: true
+        required: true
   StudyArm:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - type
-    - dataOriginDescription
-    - dataOriginType
-    - populationIds
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      type:
+        range: Code
+        inlined: true
+        required: true
+      dataOriginDescription:
+        range: string
+        required: true
+      dataOriginType:
+        range: Code
+        inlined: true
+        required: true
+      populationIds:
+        range: string
+        multivalued: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyArm
+        designates_type: true
+        required: true
   StudyCell:
-    is_a: ApiBaseModelWithId
-    slots:
-    - armId
-    - epochId
-    - elementIds
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      armId:
+        range: string
+        required: true
+      epochId:
+        range: string
+        required: true
+      elementIds:
+        range: string
+        multivalued: true
+        required: true
       instanceType:
+        range: string
         equals_string: StudyCell
+        designates_type: true
+        required: true
   StudyChange:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - summary
-    - rationale
-    - changedSections
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      summary:
+        range: string
+        required: true
+      rationale:
+        range: string
+        required: true
+      changedSections:
+        range: DocumentContentReference
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
       instanceType:
+        range: string
         equals_string: StudyChange
+        designates_type: true
+        required: true
   StudyCohort:
-    slots:
-    - id
-    - extensionAttributes
-    - name
-    - label
-    - description
-    - includesHealthySubjects
-    - plannedEnrollmentNumber
-    - plannedCompletionNumber
-    - plannedSex
-    - criterionIds
-    - plannedAge
-    - notes
-    - instanceType
-    - characteristics
-    - indicationIds
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      includesHealthySubjects:
+        range: boolean
+        required: true
+      plannedEnrollmentNumber:
+        range: Any
+        any_of:
+        - range: Quantity
+          inlined: true
+        - range: Range
+          inlined: true
+        inlined: true
+        required: false
+      plannedCompletionNumber:
+        range: Any
+        any_of:
+        - range: Quantity
+          inlined: true
+        - range: Range
+          inlined: true
+        inlined: true
+        required: false
+      plannedSex:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      criterionIds:
+        range: string
+        multivalued: true
+        required: false
+      plannedAge:
+        range: Range
+        inlined: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      characteristics:
+        range: Characteristic
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      indicationIds:
+        range: string
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyCohort
+        designates_type: true
+        required: true
   StudyDefinitionDocument:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - language
-    - type
-    - templateName
-    - versions
-    - childIds
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      language:
+        range: Code
+        inlined: true
+        required: true
+      type:
+        range: Code
+        inlined: true
+        required: true
+      templateName:
+        range: string
+        required: true
+      versions:
+        range: StudyDefinitionDocumentVersion
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      childIds:
+        range: string
+        multivalued: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyDefinitionDocument
+        designates_type: true
+        required: true
   StudyDefinitionDocumentVersion:
-    is_a: ApiBaseModelWithId
-    slots:
-    - version
-    - status
-    - dateValues
-    - contents
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      version:
+        range: string
+        required: true
+      status:
+        range: Code
+        inlined: true
+        required: true
+      dateValues:
+        range: GovernanceDate
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      contents:
+        range: NarrativeContent
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyDefinitionDocumentVersion
-  StudyDesign:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    abstract: true
-    slots:
-    - studyType
-    - studyPhase
-    - therapeuticAreas
-    - characteristics
-    - encounters
-    - activities
-    - arms
-    - studyCells
-    - rationale
-    - epochs
-    - elements
-    - estimands
-    - indications
-    - studyInterventionIds
-    - objectives
-    - population
-    - scheduleTimelines
-    - biospecimenRetentions
-    - documentVersionIds
-    - eligibilityCriteria
-    - analysisPopulations
-    - notes
-    - instanceType
-    slot_usage:
-      instanceType:
-        equals_string: StudyDesign
+        designates_type: true
+        required: true
   StudyDesignPopulation:
-    slots:
-    - id
-    - extensionAttributes
-    - name
-    - label
-    - description
-    - includesHealthySubjects
-    - plannedEnrollmentNumber
-    - plannedCompletionNumber
-    - plannedSex
-    - criterionIds
-    - plannedAge
-    - notes
-    - instanceType
-    - cohorts
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      includesHealthySubjects:
+        range: boolean
+        required: true
+      plannedEnrollmentNumber:
+        range: Any
+        any_of:
+        - range: Quantity
+          inlined: true
+        - range: Range
+          inlined: true
+        inlined: true
+        required: false
+      plannedCompletionNumber:
+        range: Any
+        any_of:
+        - range: Quantity
+          inlined: true
+        - range: Range
+          inlined: true
+        inlined: true
+        required: false
+      plannedSex:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      criterionIds:
+        range: string
+        multivalued: true
+        required: false
+      plannedAge:
+        range: Range
+        inlined: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      cohorts:
+        range: StudyCohort
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyDesignPopulation
+        designates_type: true
+        required: true
   StudyElement:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - transitionStartRule
-    - transitionEndRule
-    - studyInterventionIds
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      transitionStartRule:
+        range: TransitionRule
+        inlined: true
+        required: false
+      transitionEndRule:
+        range: TransitionRule
+        inlined: true
+        required: false
+      studyInterventionIds:
+        range: string
+        multivalued: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyElement
+        designates_type: true
+        required: true
   StudyEpoch:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - type
-    - previousId
-    - nextId
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      type:
+        range: Code
+        inlined: true
+        required: true
+      previousId:
+        range: string
+        required: false
+      nextId:
+        range: string
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyEpoch
+        designates_type: true
+        required: true
   StudyIdentifier:
-    slots:
-    - id
-    - extensionAttributes
-    - text
-    - scopeId
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      text:
+        range: string
+        required: true
+      scopeId:
+        range: string
+        required: true
       instanceType:
+        range: string
         equals_string: StudyIdentifier
+        designates_type: true
+        required: true
   StudyIntervention:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - role
-    - type
-    - minimumResponseDuration
-    - codes
-    - administrations
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      role:
+        range: Code
+        inlined: true
+        required: true
+      type:
+        range: Code
+        inlined: true
+        required: true
+      minimumResponseDuration:
+        range: Quantity
+        inlined: true
+        required: false
+      codes:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      administrations:
+        range: Administration
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyIntervention
+        designates_type: true
+        required: true
   StudyRole:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - code
-    - appliesToIds
-    - assignedPersons
-    - organizationIds
-    - masking
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      code:
+        range: Code
+        inlined: true
+        required: true
+      appliesToIds:
+        range: string
+        multivalued: true
+        required: false
+      assignedPersons:
+        range: AssignedPerson
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      organizationIds:
+        range: string
+        multivalued: true
+        required: false
+      masking:
+        range: Masking
+        inlined: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyRole
+        designates_type: true
+        required: true
   StudySite:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - country
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      country:
+        range: Code
+        inlined: true
+        required: true
       instanceType:
+        range: string
         equals_string: StudySite
+        designates_type: true
+        required: true
   StudyTitle:
-    is_a: ApiBaseModelWithId
-    slots:
-    - text
-    - type
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      text:
+        range: string
+        required: true
+      type:
+        range: Code
+        inlined: true
+        required: true
       instanceType:
+        range: string
         equals_string: StudyTitle
+        designates_type: true
+        required: true
   StudyVersion:
-    is_a: ApiBaseModelWithId
-    slots:
-    - versionIdentifier
-    - rationale
-    - documentVersionIds
-    - dateValues
-    - amendments
-    - businessTherapeuticAreas
-    - studyIdentifiers
-    - referenceIdentifiers
-    - studyDesigns
-    - titles
-    - eligibilityCriterionItems
-    - narrativeContentItems
-    - abbreviations
-    - roles
-    - organizations
-    - studyInterventions
-    - administrableProducts
-    - medicalDevices
-    - productOrganizationRoles
-    - biomedicalConcepts
-    - bcCategories
-    - bcSurrogates
-    - dictionaries
-    - conditions
-    - notes
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      versionIdentifier:
+        range: string
+        required: true
+      rationale:
+        range: string
+        required: true
+      documentVersionIds:
+        range: string
+        multivalued: true
+        required: false
+      dateValues:
+        range: GovernanceDate
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      amendments:
+        range: StudyAmendment
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      businessTherapeuticAreas:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      studyIdentifiers:
+        range: StudyIdentifier
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      referenceIdentifiers:
+        range: ReferenceIdentifier
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      studyDesigns:
+        range: Any
+        any_of:
+        - range: InterventionalStudyDesign
+          inlined: true
+        - range: ObservationalStudyDesign
+          inlined: true
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      titles:
+        range: StudyTitle
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      eligibilityCriterionItems:
+        range: EligibilityCriterionItem
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      narrativeContentItems:
+        range: NarrativeContentItem
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      abbreviations:
+        range: Abbreviation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      roles:
+        range: StudyRole
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      organizations:
+        range: Organization
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      studyInterventions:
+        range: StudyIntervention
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      administrableProducts:
+        range: AdministrableProduct
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      medicalDevices:
+        range: MedicalDevice
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      productOrganizationRoles:
+        range: ProductOrganizationRole
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      biomedicalConcepts:
+        range: BiomedicalConcept
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      bcCategories:
+        range: BiomedicalConceptCategory
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      bcSurrogates:
+        range: BiomedicalConceptSurrogate
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      dictionaries:
+        range: SyntaxTemplateDictionary
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      conditions:
+        range: Condition
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      notes:
+        range: CommentAnnotation
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
       instanceType:
+        range: string
         equals_string: StudyVersion
+        designates_type: true
+        required: true
   SubjectEnrollment:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - quantity
-    - forGeographicScope
-    - forStudyCohortId
-    - forStudySiteId
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      quantity:
+        range: Quantity
+        inlined: true
+        required: true
+      forGeographicScope:
+        range: GeographicScope
+        inlined: true
+        required: false
+      forStudyCohortId:
+        range: string
+        required: false
+      forStudySiteId:
+        range: string
+        required: false
       instanceType:
+        range: string
         equals_string: SubjectEnrollment
+        designates_type: true
+        required: true
   Substance:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - codes
-    - strengths
-    - referenceSubstance
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      codes:
+        range: Code
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      strengths:
+        range: Strength
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
+      referenceSubstance:
+        range: Substance
+        inlined: true
+        required: false
       instanceType:
+        range: string
         equals_string: Substance
-  SyntaxTemplate:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    abstract: true
-    slots:
-    - text
-    - dictionaryId
-    - notes
-    - instanceType
-    slot_usage:
-      instanceType:
-        equals_string: SyntaxTemplate
+        designates_type: true
+        required: true
   SyntaxTemplateDictionary:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - parameterMaps
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      parameterMaps:
+        range: ParameterMap
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: true
       instanceType:
+        range: string
         equals_string: SyntaxTemplateDictionary
+        designates_type: true
+        required: true
   Timing:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - type
-    - value
-    - valueLabel
-    - relativeToFrom
-    - relativeFromScheduledInstanceId
-    - relativeToScheduledInstanceId
-    - windowLower
-    - windowUpper
-    - windowLabel
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      type:
+        range: Code
+        inlined: true
+        required: true
+      value:
+        range: string
+        required: true
+      valueLabel:
+        range: string
+        required: true
+      relativeToFrom:
+        range: Code
+        inlined: true
+        required: true
+      relativeFromScheduledInstanceId:
+        range: string
+        required: true
+      relativeToScheduledInstanceId:
+        range: string
+        required: false
+      windowLower:
+        range: string
+        required: false
+      windowUpper:
+        range: string
+        required: false
+      windowLabel:
+        range: string
+        required: false
       instanceType:
+        range: string
         equals_string: Timing
+        designates_type: true
+        required: true
   TransitionRule:
-    is_a: ApiBaseModelWithIdNameLabelAndDesc
-    slots:
-    - text
-    - instanceType
-    slot_usage:
+    attributes:
+      id:
+        range: string
+        pattern: ^[\s\S]+$
+        identifier: true
+        required: true
+      extensionAttributes:
+        range: ExtensionAttribute
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+        required: false
+      name:
+        range: string
+        pattern: ^[\s\S]+$
+        required: true
+      label:
+        range: string
+        required: false
+      description:
+        range: string
+        required: false
+      text:
+        range: string
+        required: true
       instanceType:
+        range: string
         equals_string: TransitionRule
+        designates_type: true
+        required: true
   Wrapper:
-    is_a: ApiBaseModel
-    slots:
-    - study
-    - usdmVersion
-    - systemName
-    - systemVersion
-slots:
-  id:
-    range: string
-    identifier: true
-    required: false
-  extensionAttributes:
-    multivalued: true
-    range: ExtensionAttribute
-    required: false
-  abbreviatedText:
-    range: string
-    required: false
-  expandedText:
-    range: string
-    required: false
-  notes:
-    multivalued: true
-    range: CommentAnnotation
-    required: false
-  instanceType:
-    range: string
-    designates_type: true
-    required: false
-  name:
-    range: string
-    required: false
-  label:
-    range: string
-    required: false
-  description:
-    range: string
-    required: false
-  previousId:
-    range: string
-    required: false
-    inlined: false
-  nextId:
-    range: string
-    required: false
-    inlined: false
-  childIds:
-    multivalued: true
-    range: string
-    inlined: false
-    required: false
-  definedProcedures:
-    multivalued: true
-    range: Procedure
-    required: false
-  biomedicalConceptIds:
-    multivalued: true
-    range: BiomedicalConcept
-    inlined: false
-    required: false
-  bcCategoryIds:
-    multivalued: true
-    range: string
-    inlined: false
-    required: false
-  bcSurrogateIds:
-    multivalued: true
-    range: string
-    inlined: false
-    required: false
-  timelineId:
-    range: ScheduleTimeline
-    required: false
-    inlined: false
-  text:
-    range: string
-    required: false
-  lines:
-    multivalued: true
-    range: string
-    required: false
-  city:
-    range: string
-    required: false
-  district:
-    range: string
-    required: false
-  state:
-    range: string
-    required: false
-  postalCode:
-    range: string
-    required: false
-  country:
-    range: Code
-    required: false
-  pharmacologicClass:
-    range: Code
-    required: false
-  administrableDoseForm:
-    range: AliasCode
-    required: false
-  productDesignation:
-    range: Code
-    required: false
-  sourcing:
-    range: Code
-    required: false
-  properties:
-    multivalued: true
-    range: AdministrableProductProperty
-    required: false
-  identifiers:
-    multivalued: true
-    range: AdministrableProductIdentifier
-    required: false
-  ingredients:
-    multivalued: true
-    range: Ingredient
-    required: false
-  scopeId:
-    range: string
-    inlined: false
-    required: false
-  type:
-    range: Code
-    required: false
-  quantity:
-    range: Quantity
-    required: false
-  duration:
-    range: Duration
-    required: false
-  dose:
-    range: Quantity
-    required: false
-  route:
-    range: AliasCode
-    required: false
-  frequency:
-    range: AliasCode
-    required: false
-  administrableProductId:
-    range: AdministrableProduct
-    required: false
-    inlined: false
-  medicalDeviceId:
-    range: MedicalDevice
-    required: false
-    inlined: false
-  standardCode:
-    range: Code
-    required: false
-  standardCodeAliases:
-    multivalued: true
-    range: Code
-    required: false
-  subsetOfIds:
-    multivalued: true
-    range: string
-    inlined: false
-    required: false
-  personName:
-    range: PersonName
-    required: false
-  jobTitle:
-    range: string
-    required: false
-  organizationId:
-    range: Organization
-    required: false
-    inlined: false
-  code:
-    range: string
-    required: false
-  codeSystem:
-    range: string
-    required: false
-  codeSystemVersion:
-    range: string
-    required: false
-  decode:
-    range: string
-    required: false
-  value:
-    range: float
-    required: false
-  unit:
-    range: BaseAliasCode
-    required: false
-  minValue:
-    range: BaseQuantity
-    required: false
-  maxValue:
-    range: BaseQuantity
-    required: false
-  isApproximate:
-    range: boolean
-    required: false
-  synonyms:
-    multivalued: true
-    range: string
-    required: false
-  reference:
-    range: string
-    required: false
-  memberIds:
-    multivalued: true
-    range: string
-    inlined: false
-    required: false
-  isRequired:
-    range: boolean
-    required: false
-  isEnabled:
-    range: boolean
-    required: false
-  datatype:
-    range: string
-    required: false
-  responseCodes:
-    multivalued: true
-    range: ResponseCode
-    required: false
-  isRetained:
-    range: boolean
-    required: false
-  includesDNA:
-    range: boolean
-    required: false
-  dictionaryId:
-    range: string
-    required: false
-    inlined: false
-  codes:
-    multivalued: true
-    range: Code
-    required: false
-  contextIds:
-    multivalued: true
-    range: string
-    inlined: false
-    required: false
-  appliesToIds:
-    multivalued: true
-    range: string
-    inlined: false
-    required: false
-  condition:
-    range: string
-    required: false
-  conditionTargetId:
-    range: string
-    inlined: false
-    required: false
-  sectionNumber:
-    range: string
-    required: false
-  sectionTitle:
-    range: string
-    required: false
-  appliesToId:
-    range: string
-    inlined: false
-    required: false
-  durationWillVary:
-    range: boolean
-    required: false
-  reasonDurationWillVary:
-    range: string
-    required: false
-  category:
-    range: Code
-    required: false
-  identifier:
-    range: string
-    required: false
-  criterionItemId:
-    range: string
-    inlined: false
-    required: false
-  scheduledAtId:
-    range: string
-    required: false
-    inlined: false
-  environmentalSettings:
-    multivalued: true
-    range: Code
-    required: false
-  contactModes:
-    multivalued: true
-    range: Code
-    required: false
-  transitionStartRule:
-    range: TransitionRule
-    required: false
-  transitionEndRule:
-    range: TransitionRule
-    required: false
-  purpose:
-    range: string
-    required: false
-  level:
-    range: Code
-    required: false
-  populationSummary:
-    range: string
-    required: false
-  analysisPopulationId:
-    range: AnalysisPopulation
-    inlined: false
-    required: false
-  interventionIds:
-    multivalued: true
-    range: StudyIntervention
-    inlined: false
-    required: false
-  variableOfInterestId:
-    range: string
-    inlined: false
-    required: false
-  intercurrentEvents:
-    multivalued: true
-    range: IntercurrentEvent
-    required: false
-  url:
-    range: string
-    required: false
-  valueString:
-    range: string
-    required: false
-  valueBoolean:
-    range: boolean
-    required: false
-  valueInteger:
-    range: integer
-    required: false
-  valueId:
-    range: string
-    required: false
-    inlined: false
-  valueQuantity:
-    range: BaseQuantity
-    required: false
-  valueRange:
-    range: BaseRange
-    required: false
-  valueCode:
-    range: BaseCode
-    required: false
-  valueAliasCode:
-    range: BaseAliasCode
-    required: false
-  valueExtensionClass:
-    range: string
-    required: false
-  dateValue:
-    range: string
-    required: false
-  geographicScopes:
-    multivalued: true
-    range: GeographicScope
-    required: false
-  isRareDisease:
-    range: boolean
-    required: false
-  role:
-    range: Code
-    required: false
-  substance:
-    range: Substance
-    required: false
-  strategy:
-    range: string
-    required: false
-  studyType:
-    range: Code
-    required: false
-  studyPhase:
-    range: AliasCode
-    required: false
-  therapeuticAreas:
-    multivalued: true
-    range: Code
-    required: false
-  characteristics:
-    multivalued: true
-    range: Code
-    required: false
-  encounters:
-    multivalued: true
-    range: Encounter
-    required: false
-  activities:
-    multivalued: true
-    range: Activity
-    required: false
-  arms:
-    multivalued: true
-    range: StudyArm
-    required: false
-  studyCells:
-    multivalued: true
-    range: StudyCell
-    required: false
-  rationale:
-    range: string
-    required: false
-  epochs:
-    multivalued: true
-    range: StudyEpoch
-    required: false
-  elements:
-    multivalued: true
-    range: StudyElement
-    required: false
-  estimands:
-    multivalued: true
-    range: Estimand
-    required: false
-  indications:
-    multivalued: true
-    range: Indication
-    required: false
-  studyInterventionIds:
-    multivalued: true
-    range: StudyIntervention
-    inlined: false
-    required: false
-  objectives:
-    multivalued: true
-    range: Objective
-    required: false
-  population:
-    range: StudyDesignPopulation
-    required: false
-  scheduleTimelines:
-    multivalued: true
-    range: ScheduleTimeline
-    required: false
-  biospecimenRetentions:
-    multivalued: true
-    range: BiospecimenRetention
-    required: false
-  documentVersionIds:
-    multivalued: true
-    range: string
-    inlined: false
-    required: false
-  eligibilityCriteria:
-    multivalued: true
-    range: EligibilityCriterion
-    required: false
-  analysisPopulations:
-    multivalued: true
-    range: AnalysisPopulation
-    required: false
-  subTypes:
-    multivalued: true
-    range: Code
-    required: false
-  model:
-    range: Code
-    required: false
-  intentTypes:
-    multivalued: true
-    range: Code
-    required: false
-  blindingSchema:
-    range: AliasCode
-    required: false
-  isMasked:
-    range: boolean
-    required: false
-  hardwareVersion:
-    range: string
-    required: false
-  softwareVersion:
-    range: string
-    required: false
-  embeddedProductId:
-    range: string
-    required: false
-    inlined: false
-  displaySectionNumber:
-    range: boolean
-    required: false
-  displaySectionTitle:
-    range: boolean
-    required: false
-  contentItemId:
-    range: string
-    required: false
-    inlined: false
-  endpoints:
-    multivalued: true
-    range: Endpoint
-    required: false
-  timePerspective:
-    range: Code
-    required: false
-  samplingMethod:
-    range: Code
-    required: false
-  identifierScheme:
-    range: string
-    required: false
-  legalAddress:
-    range: Address
-    required: false
-  managedSites:
-    multivalued: true
-    range: StudySite
-    required: false
-  tag:
-    range: string
-    required: false
-  familyName:
-    range: string
-    required: false
-  givenNames:
-    multivalued: true
-    range: string
-    required: false
-  prefixes:
-    multivalued: true
-    range: string
-    required: false
-  suffixes:
-    multivalued: true
-    range: string
-    required: false
-  procedureType:
-    range: string
-    required: false
-  studyInterventionId:
-    range: StudyIntervention
-    required: false
-    inlined: false
-  mainTimeline:
-    range: boolean
-    required: false
-  entryCondition:
-    range: string
-    required: false
-  entryId:
-    range: string
-    inlined: false
-    required: false
-  exits:
-    multivalued: true
-    range: ScheduleTimelineExit
-    required: false
-  timings:
-    multivalued: true
-    range: Timing
-    required: false
-  instances:
-    multivalued: true
-    any_of:
-    - range: ScheduledActivityInstance
-    - range: ScheduledDecisionInstance
-    required: false
-  plannedDuration:
-    range: Duration
-    required: false
-  defaultConditionId:
-    range: string
-    required: false
-    inlined: false
-  epochId:
-    range: StudyEpoch
-    required: false
-    inlined: false
-  timelineExitId:
-    range: ScheduleTimelineExit
-    required: false
-    inlined: false
-  activityIds:
-    multivalued: true
-    range: Activity
-    inlined: false
-    required: false
-  encounterId:
-    range: Encounter
-    required: false
-    inlined: false
-  conditionAssignments:
-    multivalued: true
-    range: ConditionAssignment
-    required: false
-  numerator:
-    any_of:
-    - range: Quantity
-    - range: Range
-    required: false
-  denominator:
-    range: Quantity
-    required: false
-  versions:
-    multivalued: true
-    range: StudyVersion
-    required: false
-  documentedBy:
-    multivalued: true
-    range: StudyDefinitionDocument
-    required: false
-  number:
-    range: string
-    required: false
-  summary:
-    range: string
-    required: false
-  primaryReason:
-    range: StudyAmendmentReason
-    required: false
-  secondaryReasons:
-    multivalued: true
-    range: StudyAmendmentReason
-    required: false
-  changes:
-    multivalued: true
-    range: StudyChange
-    required: false
-  impacts:
-    multivalued: true
-    range: StudyAmendmentImpact
-    required: false
-  enrollments:
-    multivalued: true
-    range: SubjectEnrollment
-    required: false
-  dateValues:
-    multivalued: true
-    range: GovernanceDate
-    required: false
-  isSubstantial:
-    range: boolean
-    required: false
-  otherReason:
-    range: string
-    required: false
-  dataOriginDescription:
-    range: string
-    required: false
-  dataOriginType:
-    range: Code
-    required: false
-  populationIds:
-    multivalued: true
-    range: string
-    inlined: false
-    required: false
-  armId:
-    range: StudyArm
-    inlined: false
-    required: false
-  elementIds:
-    multivalued: true
-    range: StudyElement
-    inlined: false
-    required: false
-  changedSections:
-    multivalued: true
-    range: DocumentContentReference
-    required: false
-  includesHealthySubjects:
-    range: boolean
-    required: false
-  plannedEnrollmentNumber:
-    any_of:
-    - range: Quantity
-    - range: Range
-    required: true
-  plannedCompletionNumber:
-    any_of:
-    - range: Quantity
-    - range: Range
-    required: true
-  plannedSex:
-    multivalued: true
-    range: Code
-    required: false
-  criterionIds:
-    multivalued: true
-    range: string
-    inlined: false
-    required: false
-  plannedAge:
-    range: Range
-    required: false
-  indicationIds:
-    multivalued: true
-    range: Indication
-    inlined: false
-    required: false
-  language:
-    range: Code
-    required: false
-  templateName:
-    range: string
-    required: false
-  version:
-    range: string
-    required: false
-  status:
-    range: Code
-    required: false
-  contents:
-    multivalued: true
-    range: NarrativeContent
-    required: false
-  cohorts:
-    multivalued: true
-    range: StudyCohort
-    required: false
-  minimumResponseDuration:
-    range: Quantity
-    required: false
-  administrations:
-    multivalued: true
-    range: Administration
-    required: false
-  assignedPersons:
-    multivalued: true
-    range: AssignedPerson
-    required: false
-  organizationIds:
-    multivalued: true
-    range: Organization
-    inlined: false
-    required: false
-  masking:
-    range: Masking
-    required: false
-  versionIdentifier:
-    range: string
-    required: false
-  amendments:
-    multivalued: true
-    range: StudyAmendment
-    required: false
-  businessTherapeuticAreas:
-    multivalued: true
-    range: Code
-    required: false
-  studyIdentifiers:
-    multivalued: true
-    range: StudyIdentifier
-    required: false
-  referenceIdentifiers:
-    multivalued: true
-    range: ReferenceIdentifier
-    required: false
-  studyDesigns:
-    multivalued: true
-    any_of:
-    - range: InterventionalStudyDesign
-    - range: ObservationalStudyDesign
-    required: false
-  titles:
-    multivalued: true
-    range: StudyTitle
-    required: false
-  eligibilityCriterionItems:
-    multivalued: true
-    range: EligibilityCriterionItem
-    required: false
-  narrativeContentItems:
-    multivalued: true
-    range: NarrativeContentItem
-    required: false
-  abbreviations:
-    multivalued: true
-    range: Abbreviation
-    required: false
-  roles:
-    multivalued: true
-    range: StudyRole
-    required: false
-  organizations:
-    multivalued: true
-    range: Organization
-    required: false
-  studyInterventions:
-    multivalued: true
-    range: StudyIntervention
-    required: false
-  administrableProducts:
-    multivalued: true
-    range: AdministrableProduct
-    required: false
-  medicalDevices:
-    multivalued: true
-    range: MedicalDevice
-    required: false
-  productOrganizationRoles:
-    multivalued: true
-    range: ProductOrganizationRole
-    required: false
-  biomedicalConcepts:
-    multivalued: true
-    range: BiomedicalConcept
-    required: false
-  bcCategories:
-    multivalued: true
-    range: BiomedicalConceptCategory
-    required: false
-  bcSurrogates:
-    multivalued: true
-    range: BiomedicalConceptSurrogate
-    required: false
-  dictionaries:
-    multivalued: true
-    range: SyntaxTemplateDictionary
-    required: false
-  conditions:
-    multivalued: true
-    range: Condition
-    required: false
-  forGeographicScope:
-    range: GeographicScope
-    required: false
-  forStudyCohortId:
-    range: string
-    required: false
-    inlined: false
-  forStudySiteId:
-    range: string
-    required: false
-    inlined: false
-  strengths:
-    multivalued: true
-    range: Strength
-    required: false
-  referenceSubstance:
-    range: Substance
-    required: false
-  parameterMaps:
-    multivalued: true
-    range: ParameterMap
-    required: false
-  valueLabel:
-    range: string
-    required: false
-  relativeToFrom:
-    range: Code
-    required: false
-  relativeFromScheduledInstanceId:
-    range: string
-    inlined: false
-    required: false
-  relativeToScheduledInstanceId:
-    range: string
-    required: false
-    inlined: false
-  windowLower:
-    range: string
-    required: false
-  windowUpper:
-    range: string
-    required: false
-  windowLabel:
-    range: string
-    required: false
-  study:
-    range: Study
-    required: false
-  usdmVersion:
-    range: string
-    required: false
-  systemName:
-    range: string
-    required: false
-  systemVersion:
-    range: string
-    required: false
+    attributes:
+      study:
+        range: Study
+        inlined: true
+        required: true
+      usdmVersion:
+        range: string
+        required: true
+      systemName:
+        range: string
+        required: false
+      systemVersion:
+        range: string
+        required: false
