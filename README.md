@@ -20,6 +20,16 @@ python scripts/generate_schema.py
 pytest
 ```
 
+## ER diagram and documentation
+
+```bash
+python scripts/generate_docs.py   # after step 2
+```
+
+Writes a Mermaid ER diagram to `output/usdm.erdiagram.md` and Markdown docs to `output/docs/`.
+
+**Automatic on merge:** when a change is merged to `main`, the `Generate outputs` GitHub Action regenerates `usdm.yaml`, `usdm.schema.json`, the ER diagram and the docs, and commits any changes back to `main`.
+
 ## Generate other formats
 
 `output/usdm.schema.json` is produced by step 2. For other formats, run these from the project root:
@@ -71,7 +81,8 @@ Note: the `linkml-validate` command treats an empty list (`[]`) in a required li
 ```
 files/USDM_API_v4.0.0.json        input spec
 src/usdm_to_linkml/converter.py   converter
-scripts/generate_schema.py        command-line entry point
+scripts/generate_schema.py        generates the LinkML and JSON Schema
+scripts/generate_docs.py          generates the ER diagram and docs
 output/                           generated schemas
 examples/                         sample USDM v4.0.0 files used in tests
 tests/test_converter.py           conformance and regression tests
