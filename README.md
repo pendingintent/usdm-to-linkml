@@ -1,5 +1,8 @@
 # USDM to LinkML
 
+[![Tests](https://github.com/pendingintent/usdm-to-linkml/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/pendingintent/usdm-to-linkml/actions/workflows/tests.yml)
+[![Generate outputs](https://github.com/pendingintent/usdm-to-linkml/actions/workflows/generate-outputs.yml/badge.svg?branch=main)](https://github.com/pendingintent/usdm-to-linkml/actions/workflows/generate-outputs.yml)
+
 Converts the [USDM](https://www.cdisc.org/ddf) (Unified Study Definitions Model) **v4.0.0 OpenAPI specification** into a [LinkML](https://linkml.io) schema, so you can generate JSON Schema, Python, OWL and other formats from one source.
 
 - **Input:** `files/USDM_API_v4.0.0.json` (the source of truth)
