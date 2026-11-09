@@ -1,0 +1,80 @@
+
+
+# Slot: isEnabled 
+
+
+
+URI: [usdm:isEnabled](https://www.cdisc.org/usdm/isEnabled)
+Alias: isEnabled
+
+<!-- no inheritance hierarchy -->
+
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
+| --- | --- | --- |
+| [ResponseCode](ResponseCode.md) |  |  no  |
+| [BiomedicalConceptProperty](BiomedicalConceptProperty.md) |  |  no  |
+
+
+
+
+
+
+## Properties
+
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | [String](String.md) |
+| Domain Of | [BiomedicalConceptProperty](BiomedicalConceptProperty.md), [ResponseCode](ResponseCode.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | usdm:isEnabled |
+| native | usdm:isEnabled |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: isEnabled
+alias: isEnabled
+domain_of:
+- BiomedicalConceptProperty
+- ResponseCode
+range: string
+
+```
+</details>
