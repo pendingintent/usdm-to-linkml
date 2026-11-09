@@ -13,7 +13,7 @@ imports:
 classes:
   Any:
     class_uri: linkml:Any
-    abstract: true
+    description: Unconstrained range of union-typed attributes; their any_of narrows it to the allowed classes.
   Abbreviation:
     attributes:
       id:
@@ -871,7 +871,9 @@ classes:
         range: Any
         any_of:
         - range: Quantity
+          inlined: true
         - range: Range
+          inlined: true
         inlined: true
         required: false
       durationWillVary:
@@ -2304,7 +2306,9 @@ classes:
         range: Any
         any_of:
         - range: ScheduledActivityInstance
+          inlined: true
         - range: ScheduledDecisionInstance
+          inlined: true
         inlined: true
         inlined_as_list: true
         multivalued: true
@@ -2450,7 +2454,9 @@ classes:
         range: Any
         any_of:
         - range: Quantity
+          inlined: true
         - range: Range
+          inlined: true
         inlined: true
         required: true
       denominator:
@@ -2790,14 +2796,18 @@ classes:
         range: Any
         any_of:
         - range: Quantity
+          inlined: true
         - range: Range
+          inlined: true
         inlined: true
         required: false
       plannedCompletionNumber:
         range: Any
         any_of:
         - range: Quantity
+          inlined: true
         - range: Range
+          inlined: true
         inlined: true
         required: false
       plannedSex:
@@ -2963,14 +2973,18 @@ classes:
         range: Any
         any_of:
         - range: Quantity
+          inlined: true
         - range: Range
+          inlined: true
         inlined: true
         required: false
       plannedCompletionNumber:
         range: Any
         any_of:
         - range: Quantity
+          inlined: true
         - range: Range
+          inlined: true
         inlined: true
         required: false
       plannedSex:
@@ -3346,7 +3360,9 @@ classes:
         range: Any
         any_of:
         - range: InterventionalStudyDesign
+          inlined: true
         - range: ObservationalStudyDesign
+          inlined: true
         inlined: true
         inlined_as_list: true
         multivalued: true

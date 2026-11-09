@@ -240,3 +240,131 @@ class TestSchemaValidity:
         out = json.loads(JsonSchemaGenerator(str(COMMITTED)).serialize())
         assert "Study" in out["$defs"]
         assert set(out["$defs"]["Activity"]["required"]) >= {"id", "name", "instanceType"}
+
+
+# ----------------------------------------------------- real-world example data
+EXAMPLES = sorted((ROOT / "examples").glob("*.json"))
+JSON_SCHEMA = ROOT / "output" / "usdm.schema.json"
+
+
+def _ids(paths):
+    return [p.stem for p in paths]
+
+
+@pytest.fixture(scope="module")
+def generated_validator():
+    from jsonschema import Draft202012Validator
+
+    defs = json.loads(JSON_SCHEMA.read_text())["$defs"]
+    return Draft202012Validator({"$ref": "#/$defs/Wrapper", "$defs": defs})
+
+
+@pytest.fixture(scope="module")
+def openapi_validator():
+    """Baseline: the original OpenAPI schema itself."""
+    from jsonschema import Draft202012Validator
+
+    spec = json.loads(SPEC.read_text())
+    return Draft202012Validator(
+        {"$ref": "#/components/schemas/Wrapper-Input", "components": spec["components"]}
+    )
+
+
+class TestJsonSchema:
+    def test_json_schema_is_up_to_date(self):
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location(
+            "generate_schema", ROOT / "scripts" / "generate_schema.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        assert JSON_SCHEMA.read_text() == module.generate_json_schema(COMMITTED)
+
+    def test_no_dangling_refs(self):
+        text = JSON_SCHEMA.read_text()
+        defs = set(json.loads(text)["$defs"])
+        refs = set(re.findall(r'"\$ref": "#/\$defs/([^"]+)"', text))
+        assert refs <= defs, f"dangling refs: {refs - defs}"
+
+    def test_union_members_are_objects_not_strings(self):
+        defs = json.loads(JSON_SCHEMA.read_text())["$defs"]
+        quantity = defs["Duration"]["properties"]["quantity"]
+        assert {"$ref": "#/$defs/Quantity"} in quantity["anyOf"]
+        assert {"$ref": "#/$defs/Range"} in quantity["anyOf"]
+
+
+@pytest.mark.skipif(not EXAMPLES, reason="no example files in examples/")
+class TestExampleFiles:
+    @pytest.mark.parametrize("path", EXAMPLES, ids=_ids(EXAMPLES))
+    def test_example_is_valid_against_openapi_baseline(self, path, openapi_validator):
+        """Sanity check: the example itself conforms to the source spec."""
+        errors = list(openapi_validator.iter_errors(json.loads(path.read_text())))
+        assert not errors, errors[0].message
+
+    @pytest.mark.parametrize("path", EXAMPLES, ids=_ids(EXAMPLES))
+    def test_example_is_valid_against_generated_json_schema(
+        self, path, generated_validator
+    ):
+        errors = list(generated_validator.iter_errors(json.loads(path.read_text())))
+        assert not errors, errors[0].message
+
+    @pytest.mark.parametrize("path", EXAMPLES, ids=_ids(EXAMPLES))
+    def test_example_is_valid_with_linkml_validator(self, path):
+        """LinkML's own validator accepts the example against the YAML schema."""
+        from linkml.validator import validate
+
+        report = validate(json.loads(path.read_text()), str(COMMITTED), "Wrapper")
+        assert not report.results, report.results[0].message
+
+
+def _walk(obj):
+    if isinstance(obj, dict):
+        yield obj
+        for v in obj.values():
+            yield from _walk(v)
+    elif isinstance(obj, list):
+        for v in obj:
+            yield from _walk(v)
+
+
+def _first(doc, instance_type):
+    return next(o for o in _walk(doc) if o.get("instanceType") == instance_type)
+
+
+@pytest.mark.skipif(not EXAMPLES, reason="no example files in examples/")
+class TestSchemaRejectsInvalidData:
+    """Guard against a schema that accepts everything."""
+
+    @pytest.fixture(scope="class")
+    def doc(self):
+        pilot = [p for p in EXAMPLES if "CDISC" in p.name] or EXAMPLES
+        return json.loads(pilot[0].read_text())
+
+    @pytest.mark.parametrize(
+        "name,mutate",
+        [
+            ("missing required name", lambda d: _first(d, "Activity").pop("name")),
+            ("empty required name", lambda d: _first(d, "Activity").update(name="")),
+            ("wrong instanceType", lambda d: _first(d, "Activity").update(instanceType="Arm")),
+            ("unknown attribute", lambda d: _first(d, "Activity").update(bogus=1)),
+            ("number for string (Timing.value)", lambda d: _first(d, "Timing").update(value=5)),
+            ("string for Code (StudyRole.code)", lambda d: _first(d, "StudyRole").update(code="x")),
+            (
+                "wrong class in union list",
+                lambda d: _first(d, "StudyVersion")["studyDesigns"].__setitem__(
+                    0, {"id": "x", "name": "y", "instanceType": "Activity"}
+                ),
+            ),
+            (
+                "string in union list",
+                lambda d: _first(d, "StudyVersion")["studyDesigns"].__setitem__(0, "sd1"),
+            ),
+        ],
+    )
+    def test_rejects(self, doc, generated_validator, name, mutate):
+        import copy
+
+        bad = copy.deepcopy(doc)
+        mutate(bad)
+        assert list(generated_validator.iter_errors(bad)), f"accepted: {name}"

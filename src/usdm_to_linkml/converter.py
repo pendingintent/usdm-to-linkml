@@ -135,7 +135,7 @@ class USDMToLinkMLConverter:
             raise ValueError(f"Unsupported union of non-class types: {options}")
         return {
             "range": "Any",
-            "any_of": [{"range": p["range"]} for p in parts],
+            "any_of": [{"range": p["range"], "inlined": True} for p in parts],
             "inlined": True,
             "inlined_as_list": True,
         }
@@ -209,9 +209,16 @@ class USDMToLinkMLConverter:
             "classes": classes,
         }
         if any_used:
-            # 'Any' is the range of union-typed slots; any_of narrows it.
+            # Must not be abstract, or gen-json-schema drops it and leaves a
+            # dangling $ref.
             self.schema["classes"] = {
-                "Any": {"class_uri": "linkml:Any", "abstract": True},
+                "Any": {
+                    "class_uri": "linkml:Any",
+                    "description": (
+                        "Unconstrained range of union-typed attributes; "
+                        "their any_of narrows it to the allowed classes."
+                    ),
+                },
                 **classes,
             }
         return self.schema

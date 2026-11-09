@@ -681,6 +681,18 @@
             "title": "AnalysisPopulation",
             "type": "object"
         },
+        "Any": {
+            "additionalProperties": true,
+            "description": "Unconstrained range of union-typed attributes; their any_of narrows it to the allowed classes.",
+            "title": "Any",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
         "AssignedPerson": {
             "additionalProperties": false,
             "description": "",
@@ -1469,10 +1481,10 @@
                 "quantity": {
                     "anyOf": [
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Quantity"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Range"
                         },
                         {
                             "type": "null"
@@ -3830,10 +3842,10 @@
                         "$ref": "#/$defs/Any",
                         "anyOf": [
                             {
-                                "type": "string"
+                                "$ref": "#/$defs/ScheduledActivityInstance"
                             },
                             {
-                                "type": "string"
+                                "$ref": "#/$defs/ScheduledDecisionInstance"
                             }
                         ]
                     },
@@ -4128,10 +4140,10 @@
                     "$ref": "#/$defs/Any",
                     "anyOf": [
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Quantity"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Range"
                         }
                     ]
                 }
@@ -4717,10 +4729,10 @@
                 "plannedCompletionNumber": {
                     "anyOf": [
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Quantity"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Range"
                         },
                         {
                             "type": "null"
@@ -4730,10 +4742,10 @@
                 "plannedEnrollmentNumber": {
                     "anyOf": [
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Quantity"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Range"
                         },
                         {
                             "type": "null"
@@ -4997,10 +5009,10 @@
                 "plannedCompletionNumber": {
                     "anyOf": [
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Quantity"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Range"
                         },
                         {
                             "type": "null"
@@ -5010,10 +5022,10 @@
                 "plannedEnrollmentNumber": {
                     "anyOf": [
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Quantity"
                         },
                         {
-                            "type": "string"
+                            "$ref": "#/$defs/Range"
                         },
                         {
                             "type": "null"
@@ -5729,10 +5741,10 @@
                         "$ref": "#/$defs/Any",
                         "anyOf": [
                             {
-                                "type": "string"
+                                "$ref": "#/$defs/InterventionalStudyDesign"
                             },
                             {
-                                "type": "string"
+                                "$ref": "#/$defs/ObservationalStudyDesign"
                             }
                         ]
                     },
